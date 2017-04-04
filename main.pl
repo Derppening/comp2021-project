@@ -7,6 +7,7 @@ use Data::Dumper;
 
 # This statement loads the file dummy/hello_world.pm
 use dummy::hello_world;
+use frame::base;
 
 use reader;
 use util;
@@ -35,6 +36,10 @@ sub main {
   my @file = reader::Import($filename, \%section);
   
   print Dumper(\%section, \@file);
+  
+  # tests:
+  frame::base::welcome();
+  frame::base::scene();
 }
 
 # Program Entry Point

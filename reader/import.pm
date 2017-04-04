@@ -3,9 +3,9 @@ package reader;
 use strict;
 use warnings FATAL => 'all';
 
-use Data::Dumper;
+use lib qw(..);
 
-use util;
+use util::die;
 
 # Reads from a file
 #
@@ -46,7 +46,7 @@ sub Import {
   
   {
     # find the range of the plot
-    # TODO: split into another function
+    # TODO(Derppening): split into another function
     my $plot_end = 0;
     foreach my $i (@section_lines) {
       if ($i > $sections{'plot'}) {

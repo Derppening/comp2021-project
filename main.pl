@@ -1,16 +1,15 @@
 #!/usr/bin/perl
 
 use strict;
-use warnings;
+use warnings FATAL => 'all';
 
 use Data::Dumper;
 
 # This statement loads the file dummy/hello_world.pm
 use dummy::hello_world;
 use frame::base;
-
-use reader;
-use util;
+use reader::import;
+use util::die;
 
 sub main {
   # A C-like main function as the entry point.

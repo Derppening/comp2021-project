@@ -2,8 +2,11 @@
 
 use strict;
 use warnings;
+
+use lib qw(..);
+
 #use Scalar::Util qw(looks_like_number);
-#use reader::import; # Does not exist yet!
+use reader::import;
 
 # Package declaration
 package frame::base;
@@ -18,7 +21,8 @@ sub isAns{ #$numAlt,$playerAns
         if ($i==$_[1]){
           return 1;
         }
-    }  # }
+    }
+  # }
   return 0;
 }
 

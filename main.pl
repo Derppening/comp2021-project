@@ -8,6 +8,9 @@ use Data::Dumper;
 # This statement loads the file dummy/hello_world.pm
 use dummy::hello_world;
 
+use reader;
+use util;
+
 sub main {
   # A C-like main function as the entry point.
   # argc and argv meaning "argument count" and "argument vector"
@@ -19,6 +22,20 @@ sub main {
   # the modules.
   # Calls HelloWorld() from dummy/hello_world.pm
   dummy::hello_world::HelloWorld();
+  
+  # load default file if we don't have one to load from
+  my $filename = "sample_structure.txt";
+  if ($argc < 1) {
+    print "Warning: Using $filename as plot\n"
+  } else {
+    $filename = $_[0];
+  }
+  
+  my %section;
+  my @file = reader::Import($filename, \%section);
+  
+  print Dumper(\%section, \@file);
 }
 
-main(\@ARGV);
+# Program Entry Point
+main(@ARGV);

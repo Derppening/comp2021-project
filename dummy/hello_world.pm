@@ -1,10 +1,8 @@
-#!/usr/bin/perl
+# Package declaration
+package dummy::hello_world;
 
 use strict;
 use warnings;
-
-# Package declaration
-package dummy::hello_world;
 
 # HelloWorld subroutine.
 #

@@ -7,6 +7,7 @@ use Data::Dumper;
 
 # This statement loads the file dummy/hello_world.pm
 use dummy::hello_world;
+use frame::base;
 
 sub main {
   # A C-like main function as the entry point.
@@ -19,6 +20,10 @@ sub main {
   # the modules.
   # Calls HelloWorld() from dummy/hello_world.pm
   dummy::hello_world::HelloWorld();
+  
+  # tests:
+  frame::base::welcome();
+  frame::base::scene();
 }
 
 main(\@ARGV);

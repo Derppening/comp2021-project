@@ -9,6 +9,8 @@ use Data::Dumper;
 use dummy::hello_world;
 use frame::base;
 use reader::import;
+use reader::importchars;
+use reader::readplot;
 use util::die;
 
 sub main {
@@ -33,8 +35,9 @@ sub main {
   
   my %section;
   my @file = reader::Import($filename, \%section);
+  my %chars = reader::ImportChars(\@file, \%section);
   
-  print Dumper(\%section, \@file);
+  reader::ReadPlot(\@file, \%section, \%chars, 1);
   
   # tests:
   frame::base::welcome();

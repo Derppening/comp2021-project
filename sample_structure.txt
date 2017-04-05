@@ -1,11 +1,17 @@
 [characters]
+# character starts with index 1
 Jason
 Bob
 
 [plot]
-1. $1 is walking on the street.
-	- Continue walking -- y: 2
-	- Stop -- n: 3
+1.
+    # Plot entry point
+    (art=hkust)
+    $1 is walking on the street.
+    He must be bored lol.
+        (opt="Continue walking",y,2)
+        (opt="Stop",n,3)
+
 2. Statement 1A
 3. Statement 1B
 

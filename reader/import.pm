@@ -24,7 +24,7 @@ sub Import {
   my @file;
   
   # open the file for reading
-  open (my $fh, '<:encoding(UTF-8)', $filename)
+  open(my $fh, '<:encoding(UTF-8)', $filename)
       or util::DieOpenFile("reader::Import()", $filename, $!);
   
   # read the headers of the structure, and store the text into an array

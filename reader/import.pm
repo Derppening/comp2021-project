@@ -31,9 +31,9 @@ sub Import {
   for (my $linenum = 1; my $row = <$fh>; ++$linenum) {
     chomp $row;
     $file[$linenum] = $row;
-    if ($row =~ /\[.+\]/) {
+    if ($row =~ /^\[.+\]$/) {
       my $tmp = $&;
-      $tmp =~ s/\[(.+)\]/$1/;
+      $tmp =~ s/^\[(.+)\]$/$1/;
       $sections{$tmp} = $linenum;
     }
   }
@@ -63,9 +63,9 @@ sub Import {
     # assign the plot elements into the temp hash
     for (my $i = $sections{'plot'}; $i < $plot_end; ++$i) {
       my $tmp = $file[$i];
-      if ($tmp =~ /\d+\..+/) {
+      if ($tmp =~ /^\d+\./) {
         my $num = $&;
-        $num =~ s/(\d+)\..+/$1/;
+        $num =~ s/^(\d+)\./$1/;
         $tmp_hash{$num} = $i;
       }
     }

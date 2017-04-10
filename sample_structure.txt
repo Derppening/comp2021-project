@@ -3,6 +3,10 @@
 Jason
 Bob
 
+[glob_var]
+
+[char_var]
+
 [plot]
 1.
     # Plot entry point
@@ -24,3 +28,4 @@ Bob
 		(opt="start again",n,1)
 
 4. Statement 2
+    (end)

@@ -1,9 +1,11 @@
 #!/usr/bin/perl
 
-#use strict;
-#use warnings FATAL => 'all';
+use strict;
+use warnings FATAL => 'all';
 
 use Data::Dumper;
+
+use lib '.';
 
 # This statement loads the file dummy/hello_world.pm
 use dummy::hello_world;
@@ -23,7 +25,6 @@ sub main {
   # for now, I will import a dummy module to show how to create and import
   # the modules.
   # Calls HelloWorld() from dummy/hello_world.pm
-  #dummy::hello_world::HelloWorld();
   
   # load default file if we don't have one to load from
   my $filename = "sample_structure.txt";
@@ -36,9 +37,9 @@ sub main {
   my %section;
   my @file = reader::Import($filename, \%section);
   my %chars = reader::ImportChars(\@file, \%section);
-
-  #my %hash = reader::ReadPlot(\@file, \%section, \%chars, 2);
   
+  my %hash = reader::ReadPlot(\@file, \%section, \%chars, 1);
+
   # tests:
   frame::base::welcome();
   frame::base::scene(\@file, \%section, \%chars);

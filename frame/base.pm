@@ -1,12 +1,13 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+#use strict;
+#use warnings;
 
 use lib qw(..);
 
 #use Scalar::Util qw(looks_like_number);
 use reader::import;
+use reader::readInput;
 
 # Package declaration
 package frame::base;
@@ -27,19 +28,29 @@ sub isAns{ #$numAlt,$playerAns
 }
 
 sub scene {
+  my @file = @{$_[0]};
+  my %section = %{$_[1]};
+  my %char = %{$_[2]};
+
   my $playerAns = "start";
-  my $numAlt = 3; #Should be reset later on
-  my $sceneInd = 0; #Should be reset later on
-  my $sceneText = "Once upon a time...\n What do you choose?\n1. Hot Milk Tea\n2. Iced Lemon Tea\n3. Ice Coffee\n";
+  my %opinion;
+  my $numAlt = 1; #Should be reset later on
+  my $sceneInd = 1; #Should be reset later on
+  my $sceneText = "!!!!!!!Begin!!!!!!!!\n";
+
   while(lc($playerAns) ne "q"){
-    #$sceneText = reader::import::??($playerAns,$sceneInd); # Something like this
-    
-    print $sceneText;
+    %opinion = reader::readInput(\@file,\%section, \%char, $sceneInd);
+
+    #print $sceneText;
     chomp($playerAns = <STDIN>);
+    $sceneInd = reader::goPlot(\%opinion, $playerAns);
     
-    while(isAns($numAlt,$playerAns)==0){
+    #while(isAns($numAlt,$playerAns)==0 || $sceneInd eq -1){
+    while($sceneInd eq -1) {
       print "You did not write a valid answer. Please try again.\n";
+      print "scendId = $sceneInd\n";
       chomp($playerAns = <STDIN>);
+       $sceneInd = reader::goPlot(\%opinion, $playerAns);
     }
   }
 }

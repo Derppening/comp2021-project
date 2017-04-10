@@ -13,6 +13,14 @@ Bob
         (opt="Stop",n,3)
 
 2. Statement 1A
+	# Plot entry point
+	FUCK.
+        (opt="Hello world",OK,1)
+        (opt="Bye world",NO,3)
+
 3. Statement 1B
+	OMG, he say no.
+		(opt="back to the beginning",y,1)
+		(opt="start again",n,1)
 
 4. Statement 2

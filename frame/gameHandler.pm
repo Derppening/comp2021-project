@@ -21,7 +21,14 @@ package frame::gameHandler;
 # output: none
 
 sub saveVar{
-	chdir '..\saves';
+	if (-e '..\saves' and -d '..\saves') {
+		chdir '..\saves';
+	} 
+	else {
+		chdir '..';
+		mkdir 'saves';
+		chdir 'saves';
+	}
 	if (open(my $checkfile, "$_[0].sav")){
 		print "The file $_[0].sav already exists. Do you want to overwrite it? (y/n)\n";
 		close ($checkfile);

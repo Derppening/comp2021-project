@@ -46,3 +46,4 @@ inc/
 
 # IntelliJ Perl Plugin XSubs
 _Deparsed_XSubs.pm
+*.sav

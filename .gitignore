@@ -46,4 +46,6 @@ inc/
 
 # IntelliJ Perl Plugin XSubs
 _Deparsed_XSubs.pm
+
+# Game savefiles
 *.sav

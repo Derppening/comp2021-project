@@ -8,12 +8,28 @@ use Data::Dumper;
 use lib '.';
 
 # This statement loads the file dummy/hello_world.pm
-use dummy::hello_world;
+use creator::mainmenu;
 use frame::base;
 use reader::import;
 use reader::importchars;
 use reader::readplot;
-use util::die;
+use util::terminal;
+
+sub VersionText {
+  print "Die Pfeilschwanzkrebse - Internal Build 20170424\n";
+  exit;
+}
+
+sub HelpText {
+  print "Usage: perl main.pl [OPTION]... [FILE]\n";
+  print "\n";
+  print "With no FILE, will load default file, or prompt user in creator mode.\n";
+  print "\n";
+  print "  -c, --creator\tuse creator mode\n";
+  print "      --help\tdisplay this help and exit\n";
+  print "      --version\toutput version information and exit\n";
+  exit;
+}
 
 sub main {
   # A C-like main function as the entry point.
@@ -21,17 +37,36 @@ sub main {
   my $argc = scalar(@_);
   my @argv = @_;
   
-  # I believe at this point, we will likely be creating our own modules, so
-  # for now, I will import a dummy module to show how to create and import
-  # the modules.
-  # Calls HelloWorld() from dummy/hello_world.pm
+  # forces flush after every print
+  $| = 1;
   
-  # load default file if we don't have one to load from
+  # read through all command-line arguments
   my $filename = "sample_structure.txt";
-  if ($argc < 1) {
-    print "Warning: Using $filename as plot\n"
-  } else {
-    $filename = $_[0];
+  my $creator = 0;
+  foreach my $arg (@argv) {
+    if ($arg eq "--version") {
+      VersionText();
+    } elsif ($arg eq "--help") {
+      HelpText();
+    } elsif ($arg eq "-c" || $arg eq "--creator") {
+      $creator = 1;
+    } elsif (substr($arg, 0, 1) eq '-') {
+      print "$arg: Invalid argument\n";
+      exit;
+    } else {
+      $filename = $arg;
+    }
+  }
+  
+  if ($creator == 1) {
+    creator::MainMenu($filename);
+    
+    util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
+    util::SetCursorPos('r', 'b');
+    <STDIN>;
+    system("clear");
+    
+    exit;
   }
   
   my %section;

@@ -1,0 +1,94 @@
+[characters]
+# character starts with index 1
+Player
+The Old Man
+
+[glob_var]
+
+[char_var]
+
+[plot]
+1.
+    # Plot entry point
+    (art=a)
+    You must have fallen asleap. Only for a short while? It is so bright. There's a sign. "Canton Road/Dundas Street sitting out area". The metal bench you are sitting on has been warmed by the sun. You are wearing grey jogging pants and a white t-shirt. An old man is sitting next to you. 
+        (opt="Talk to the old man",y,2)
+        (opt="Search your pockets",n,3)
+	(opt="Walk out of the sitting out area",n,4)
+
+
+2. Comes from 1
+	
+	"Sorry, what date is it?" you ask. The old man answers with a gurgling.
+        (opt="Search your pockets",n,3)
+	(opt="Walk out of the sitting out area",n,6)
+
+3. 
+You find three keys connected to a tiny Totoro figure in your right pocket. 86 dollars in cash in your left. 
+(opt="Buy a beer",b,5)
+(opt="Walk out of the sitting out area",w,4)
+
+4. 	
+You recognize your house, go home and get back to sleep. 
+(opt="Continue sleeping",c,42)	
+	
+5. 
+You are thirsty, and longing for a beer. When you see the bottle everything returns. 
+(opt="Go home and continue sleeping",g,6)
+
+6. 	
+You hear an alarm clock beeping in a distance.
+(opt="Wake up",g,9)
+(opt="Continue sleeping",c,7)
+
+7. 	
+You still hear an alarm clock beeping in a distance.
+(opt="Wake up",g,9)
+(opt="Continue sleeping",c,8)
+
+8. 	
+You continue hear an alarm clock beeping in a distance.
+(opt="Wake up",g,9)
+(opt="Continue sleeping",c,10)
+
+10. 	
+The alarm doesn't stop beeping. 
+(opt="Wake up",g,9)
+(opt="Continue sleeping",c,11)
+
+11. 	
+Suddenly you feel a slap in your face.
+(opt="Wake up",g,9)
+(opt="Pretend to continue sleeping",c,12)
+
+11. 	
+Suddenly you feel a slap in your face.
+(opt="Wake up",g,9)
+(opt="Pretend to continue sleeping",c,12)
+
+11. 	
+You hear someone leave the room.
+(opt="Continue sleeping",c,42)
+
+9. 	
+You open your eyes. A new day begins.
+(opt="Sing your morning song",s,42)
+
+
+42. Statement 2
+Game is over. Did you win? 
+(opt="Yes",y,100)
+(opt="NO",n,100)
+
+100.
+Please press q to quit.
+(opt="",q,)
+    (end)
+
+#Possible endings
+#- Aliens
+#- Robbery
+#- Hangover
+#- Ran away from hospital
+#- Waking up from dreaming. Two possible wake ups. Possibility to continue sleeping. 
+#- 

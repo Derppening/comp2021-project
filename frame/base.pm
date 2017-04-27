@@ -13,7 +13,7 @@ use reader::readInput;
 package frame::base;
 
 sub welcome {
-  print "Welcome to the game. Choose an alternative by typing a number. Press q to quit the game. \n";
+  print "Welcome to the game. Choose an alternative by typing a number. \nPress q to quit the game. \n";
 }
 
 sub isAns{ #$numAlt,$playerAns
@@ -51,6 +51,11 @@ sub scene {
       print "scendId = $sceneInd\n";
       chomp($playerAns = <STDIN>);
        $sceneInd = reader::goPlot(\%opinion, $playerAns);
+    }
+    
+    if($sceneInd eq 0) {
+      print "Hope you enjoy the game. Bye :D\n";
+      last;
     }
   }
 }

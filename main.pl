@@ -13,6 +13,7 @@ use frame::base;
 use reader::import;
 use reader::importchars;
 use reader::readplot;
+use reader::sceneselector;
 use util::terminal;
 
 sub VersionText {
@@ -41,7 +42,7 @@ sub main {
   $| = 1;
   
   # read through all command-line arguments
-  my $filename = "sample_structure.txt";
+  my $filename = reader::SceneSelector();;
   my $creator = 0;
   foreach my $arg (@argv) {
     if ($arg eq "--version") {
@@ -69,11 +70,12 @@ sub main {
     exit;
   }
   
+
   my %section;
   my @file = reader::Import($filename, \%section);
   my %chars = reader::ImportChars(\@file, \%section);
   
-  my %hash = reader::ReadPlot(\@file, \%section, \%chars, 1);
+#  my %hash = reader::ReadPlot(\@file, \%section, \%chars, 1);
 
   # tests:
   frame::base::welcome();

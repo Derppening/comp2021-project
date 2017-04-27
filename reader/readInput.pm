@@ -9,7 +9,7 @@ use Data::Dumper;
 use util::die;
 use reader::import;
 
-# Read input from users
+# Read input from users and return options hash table
 #
 # var1: (Reference of) File content array
 # var2: Hash of section
@@ -46,6 +46,9 @@ use reader::import;
     if(exists($option{$myAns})) {
         $result = $option{$myAns};
     } 
+    elsif ($myAns eq 'q') {
+        $result = 0;
+    }
     else {
         # The user input is not match with any options in this plot
         print "Invalid option, Please input again\n";

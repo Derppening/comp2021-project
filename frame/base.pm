@@ -37,11 +37,18 @@ sub scene {
   my $numAlt = 1; #Should be reset later on
   my $sceneInd = 1; #Should be reset later on
   my $sceneText = "!!!!!!!Begin!!!!!!!!\n";
+  system("Clear");
 
   while(lc($playerAns) ne "q"){
+    util::PrintAtPos('m', 2, "#" . $sceneInd);
+    util::SetCursorPos('l', 4);
     %opinion = reader::readInput(\@file,\%section, \%char, $sceneInd);
 
     #print $sceneText;
+    util::SetCursorPos('l', "bb");
+    util::ClearLine();
+    util::SetCursorPos('l', "bb");
+    print ": ";
     chomp($playerAns = <STDIN>);
     $sceneInd = reader::goPlot(\%opinion, $playerAns);
     
@@ -57,6 +64,7 @@ sub scene {
       print "Hope you enjoy the game. Bye :D\n";
       last;
     }
+    system("Clear");
   }
 }
 

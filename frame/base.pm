@@ -48,7 +48,7 @@ sub scene {
     #while(isAns($numAlt,$playerAns)==0 || $sceneInd eq -1){
     while($sceneInd eq -1) {
       print "You did not write a valid answer. Please try again.\n";
-      print "scendId = $sceneInd\n";
+      print "sceneId = $sceneInd\n";
       chomp($playerAns = <STDIN>);
        $sceneInd = reader::goPlot(\%opinion, $playerAns);
     }

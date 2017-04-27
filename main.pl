@@ -42,7 +42,7 @@ sub main {
   $| = 1;
   
   # read through all command-line arguments
-  my $filename = reader::SceneSelector();;
+  my $filename = "";
   my $creator = 0;
   foreach my $arg (@argv) {
     if ($arg eq "--version") {
@@ -61,15 +61,16 @@ sub main {
   
   if ($creator == 1) {
     creator::MainMenu($filename);
-    
+
     util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
     util::SetCursorPos('r', 'b');
     <STDIN>;
     system("clear");
-    
+
     exit;
   }
-  
+
+  $filename = reader::SceneSelector() if ($filename eq "");
 
   my %section;
   my @file = reader::Import($filename, \%section);

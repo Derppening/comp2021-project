@@ -17,7 +17,7 @@ Klara
 2. Statement 1A
     We are Group 12, named “Die Pfeilschwanzkrebse”.
        	(opt=“What is that means?”,1,3)
-	(opt=“About members”,2,4)
+	    (opt=“About members”,2,4)
        	(opt=“Cool.”,3,1)
 
 3. Statement 1B

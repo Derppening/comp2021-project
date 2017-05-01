@@ -9,19 +9,20 @@ use reader::import;
 use util::die;
 
 sub PlotMenu {
-  if (scalar(@_) != 3) {
-    util::DieArgs("creator::PlotMenu()", 3, scalar(@_));
+  if (scalar(@_) != 4) {
+    util::DieArgs("creator::PlotMenu()", 4, scalar(@_));
   }
   
   my @file = @{$_[0]};
   my %section = %{$_[1]};
   my %chars = %{$_[2]};
+  my $filename = $_[3];
   
   while (1) {
     util::PrintAtPos('m', 't', "=== Creator Mode: Plot Menu ===");
     util::PrintAtPos('l', 2, "show [plot]: Show plot number [plot]");
     util::PrintAtPos('l', 3, "list: List all valid plot lines");
-    util::PrintAtPos('l', 4, "edit: [PH] Edit the plot");
+    util::PrintAtPos('l', 4, "edit [plot]: Edit plot number [plot] in vim");
     util::PrintAtPos('l', 6, "quit: Quit to file menu");
     
     util::SetCursorPos('l', "bb");
@@ -47,8 +48,16 @@ sub PlotMenu {
       ShowPlot(\@file, \%section, \%chars, $plotnum);
     } elsif ($resp eq "list") {
       ListPlot(\%section);
-    } elsif ($resp eq "edit") {
-      # doesn't do anything for now
+    } elsif ((substr $resp, 0, 4) eq "edit") {
+      my $linenum = 0;
+      if (length $resp < 5) {
+        $linenum = $section{'plot'}{1};
+      } else {
+        $linenum = $section{'plot'}{int(substr $resp, 5)};
+      }
+      my $command = "vim +" . $linenum . " " . $filename;
+      system($command);
+      system("clear");
     } else {
       util::SetCursorPos('l', "b");
       print "$resp: Invalid option";

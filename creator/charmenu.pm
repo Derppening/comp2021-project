@@ -17,9 +17,7 @@ sub CharsMenu {
   while (1) {
     util::PrintAtPos('m', 't', "=== Creator Mode: Character Menu ===");
     util::PrintAtPos('l', 2, "show: Show list of characters");
-    util::PrintAtPos('l', 3, "add : [PH] Add a character");
-    util::PrintAtPos('l', 4, "edit: [PH] Edit the list of characters");
-    util::PrintAtPos('l', 6, "quit: Quit to file menu");
+    util::PrintAtPos('l', 4, "quit: Quit to file menu");
     
     util::SetCursorPos('l', "bb");
     util::ClearLine();
@@ -34,8 +32,6 @@ sub CharsMenu {
       last;
     } elsif ($resp eq "show") {
       ShowChars(\%chars);
-    } elsif ($resp eq "edit") {
-      # doesn't do anything for now
     } else {
       util::SetCursorPos('l', "b");
       print "$resp: Invalid option";
@@ -64,26 +60,6 @@ sub ShowChars {
   print "\nPress <ENTER> to continue...";
   <STDIN>;
   system("clear");
-}
-
-sub EditChars {
-  if (scalar(@_) != 1) {
-    util::DieArgs("creator::EditChars()", 1, scalar(@_));
-  }
-  
-  system("clear");
-  util::PrintAtPos('m', 't', "=== Creator Mode: Edit Characters ===");
-  
-  my %chars = %{$_[0]};
-  util::SetCursorPos('l', 2);
-  
-  while (1) {
-    foreach my $key (sort {$a <=> $b} (keys %chars)) {
-      print "$key: $chars{$key}\n";
-    }
-    
-    print "\n";
-  }
 }
 
 1;

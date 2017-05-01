@@ -3,8 +3,6 @@ package creator;
 use strict;
 use warnings FATAL => 'all';
 
-use Data::Dumper;
-
 use lib qw(..);
 
 use creator::editmenu;
@@ -34,7 +32,7 @@ sub MainMenu {
     if ($resp eq "quit") {
       last;
     } elsif ((substr $resp, 0, 4) eq "load") {
-      my $filename;
+      my $filename = "";
       if (length $resp < 5) {
         $filename = $_[0];
       } else {

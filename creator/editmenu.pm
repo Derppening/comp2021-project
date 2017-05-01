@@ -52,7 +52,7 @@ sub EditMenu {
       system("clear");
     } elsif ($resp eq "plot") {
       system("clear");
-      PlotMenu(\@file, \%section, \%chars);
+      PlotMenu(\@file, \%section, \%chars, $filename);
       system("clear");
     } elsif ($resp eq "edit") {
       my $command = "vim " . $filename;

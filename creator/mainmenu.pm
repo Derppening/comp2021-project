@@ -4,8 +4,6 @@ use strict;
 use warnings FATAL => 'all';
 
 use Data::Dumper;
-use Term::Cap;
-use Term::ReadKey;
 
 use lib qw(..);
 
@@ -22,7 +20,7 @@ sub MainMenu {
   
   while (1) {
     util::PrintAtPos("m", 't', "=== Creator Mode: Main Menu ===");
-    util::PrintAtPos('l', 2, "load: Load file");
+    util::PrintAtPos('l', 2, "load [FILE]: Load file");
     util::PrintAtPos('l', 4, "quit: Quit");
     util::SetCursorPos('l', "bb");
     util::ClearLine();
@@ -35,9 +33,15 @@ sub MainMenu {
     
     if ($resp eq "quit") {
       last;
-    } elsif ($resp eq "load") {
+    } elsif ((substr $resp, 0, 4) eq "load") {
+      my $filename;
+      if (length $resp < 5) {
+        $filename = $_[0];
+      } else {
+        $filename = substr $resp, 5;
+      }
       system("clear");
-      EditMenu($_[0]);
+      EditMenu($filename);
       system("clear");
     } else {
       util::SetCursorPos('l', "b");

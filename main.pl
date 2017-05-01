@@ -17,14 +17,14 @@ use reader::sceneselector;
 use util::terminal;
 
 sub VersionText {
-  print "Die Pfeilschwanzkrebse - Internal Build 20170424\n";
+  print "Die Pfeilschwanzkrebse - Internal Build 20170501\n";
   exit;
 }
 
 sub HelpText {
   print "Usage: perl main.pl [OPTION]... [FILE]\n";
   print "\n";
-  print "With no FILE, will load default file, or prompt user in creator mode.\n";
+  print "With no FILE, will prompt user to choose one.\n";
   print "\n";
   print "  -c, --creator\tuse creator mode\n";
   print "      --help\tdisplay this help and exit\n";
@@ -58,7 +58,7 @@ sub main {
       $filename = $arg;
     }
   }
-  
+
   if ($creator == 1) {
     creator::MainMenu($filename);
 

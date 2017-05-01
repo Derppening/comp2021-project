@@ -42,7 +42,7 @@ sub ReadPlot {
   # loop through all the lines
   foreach my $line (@plot) {
     $line =~ s/^[\s\t]+//;
-    $line =~ s/\$([\d]+)/$chars{$1}/;
+    $line =~ s/\$([\d]+)/$chars{$1}/g;
     if ($line =~ /^#.*/) {
       next;
     } elsif ($line =~ /\(art=.+\)/) {  # art

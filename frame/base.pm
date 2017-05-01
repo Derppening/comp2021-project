@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-#use strict;
-#use warnings;
+use strict;
+use warnings FATAL => 'all';
 
 use lib qw(..);
 
@@ -14,15 +14,21 @@ package frame::base;
 
 sub welcome {
   print "Welcome to the game. Choose an alternative by typing a number. \nPress q to quit the game. \n";
+  
+  util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
+  util::SetCursorPos('r', 'b');
+  <STDIN>;
+  system("clear");
 }
 
-sub isAns{ #$numAlt,$playerAns
+sub isAns{
+  #$numAlt,$playerAns
   # if (looks_like_number($_[1])){
-    for (my $i=1; $i<=$_[0] ; $i++){
-        if ($i==$_[1]){
-          return 1;
-        }
+  for (my $i = 1; $i <= $_[0]; $i++) {
+    if ($i == $_[1]) {
+      return 1;
     }
+  }
   # }
   return 0;
 }
@@ -31,19 +37,20 @@ sub scene {
   my @file = @{$_[0]};
   my %section = %{$_[1]};
   my %char = %{$_[2]};
-
+  
   my $playerAns = "start";
   my %opinion;
   my $numAlt = 1; #Should be reset later on
   my $sceneInd = 1; #Should be reset later on
   my $sceneText = "!!!!!!!Begin!!!!!!!!\n";
-  system("Clear");
-
+  
   while(lc($playerAns) ne "q"){
-    util::PrintAtPos('m', 2, "#" . $sceneInd);
+    system("clear");
+    
+    util::PrintAtPos('m', 2, "#".$sceneInd);
     util::SetCursorPos('l', 4);
-    %opinion = reader::readInput(\@file,\%section, \%char, $sceneInd);
-
+    %opinion = reader::readInput(\@file, \%section, \%char, $sceneInd);
+    
     #print $sceneText;
     util::SetCursorPos('l', "bb");
     util::ClearLine();
@@ -52,19 +59,25 @@ sub scene {
     chomp($playerAns = <STDIN>);
     $sceneInd = reader::goPlot(\%opinion, $playerAns);
     
-    #while(isAns($numAlt,$playerAns)==0 || $sceneInd eq -1){
     while($sceneInd eq -1) {
-      print "You did not write a valid answer. Please try again.\n";
-      print "sceneId = $sceneInd\n";
+      util::SetCursorPos('l', 'b');
+      print "$playerAns: Invalid option";
+      
+      sleep(2);
+      
+      util::SetCursorPos('l', 'bb');
+      util::ClearLine();
+      util::SetCursorPos('l', "bb");
+      print ": ";
       chomp($playerAns = <STDIN>);
-       $sceneInd = reader::goPlot(\%opinion, $playerAns);
+      $sceneInd = reader::goPlot(\%opinion, $playerAns);
     }
     
-    if($sceneInd eq 0) {
+    if ($sceneInd eq 0) {
       print "Hope you enjoy the game. Bye :D\n";
       last;
     }
-    system("Clear");
+    system("clear");
   }
 }
 

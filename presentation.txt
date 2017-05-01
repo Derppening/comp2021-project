@@ -11,26 +11,26 @@ Klara
 1.
     (art=hkust)
     Welcome to our presentation.
-        (opt=“Group intro”,1,2)
-        (opt=“Project Introduction”,2,4)
+        (opt="Group intro",1,2)
+        (opt="Project Introduction",2,4)
 
 2. Statement 1A
-    We are Group 12, named “Die Pfeilschwanzkrebse”.
-       	(opt=“What is that means?”,1,3)
-	    (opt=“About members”,2,4)
-       	(opt=“Cool.”,3,1)
+    We are Group 12, named "Die Pfeilschwanzkrebse".
+       	(opt="What is that means?",1,3)
+	    (opt="About members",2,4)
+       	(opt="Cool.",3,1)
 
 3. Statement 1B
     Die Pfeilschwanzkrebse is comes from ………
-	(opt=“Emm……OK.”,1,2)
-	(opt=“About members”,2,4)
+	(opt="Emm……OK.",1,2)
+	(opt="About members",2,4)
 
 4. Statement 1C
-    We have 3 members, $1 , $2 , $3.
+    We have 3 members, $1, $2, $3.
     $1 is Year 1 student.
     $2 is Year 4 CPEG student.
     $3 is year 4 Exchange student.
-	(opt=“Great!.”,1,2)
+	(opt="Great!.",1,2)
 
 5. Statement 2
     (end)

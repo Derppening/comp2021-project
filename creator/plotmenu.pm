@@ -45,6 +45,13 @@ sub PlotMenu {
         next;
       }
       my $plotnum = substr $resp, 5;
+      if ($plotnum =~ /\D/) {
+        util::PrintAtPos('l', "b", "$plotnum is not a valid plot number.");
+        sleep(2);
+        util::SetCursorPos('l', "b");
+        util::ClearLine();
+        next;
+      }
       ShowPlot(\@file, \%section, \%chars, $plotnum);
     } elsif ($resp eq "list") {
       ListPlot(\%section);
@@ -53,11 +60,42 @@ sub PlotMenu {
       if (length $resp < 5) {
         $linenum = $section{'plot'}{1};
       } else {
-        $linenum = $section{'plot'}{int(substr $resp, 5)};
+        my $sstr = substr $resp, 5;
+        if ($sstr =~ /\D/) {
+          util::PrintAtPos('l', "b", "$sstr is not a valid plot number.");
+          sleep(2);
+          util::SetCursorPos('l', "b");
+          util::ClearLine();
+          next;
+        } elsif (!(exists $section{'plot'}{int($sstr)})) {
+          util::PrintAtPos('l', "b", "$sstr is not a valid plot number.");
+          sleep(2);
+          util::SetCursorPos('l', "b");
+          util::ClearLine();
+          next;
+        }
+        $linenum = $section{'plot'}{int($sstr)};
       }
       my $command = "vim +" . $linenum . " " . $filename;
       system($command);
-      system("clear");
+
+      util::SetCursorPos('l', "bb");
+      print "Do you want to reload the file? (y/n) ";
+      my $rl_ans = <STDIN>;
+      chomp($rl_ans);
+
+      if ($rl_ans eq 'y') {
+        @file = reader::Import($filename, \%section);
+        %chars = reader::ImportChars(\@file, \%section);
+
+        util::SetCursorPos('l', "bb");
+        util::ClearLine();
+        util::PrintAtPos('l', "bb", "File successfully reloaded");
+        util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
+        <STDIN>;
+        util::SetCursorPos('l', 'b');
+        util::ClearLine();
+      }
     } else {
       util::SetCursorPos('l', "b");
       print "$resp: Invalid option";
@@ -80,7 +118,7 @@ sub ListPlot {
   util::SetCursorPos('l', 2);
   
   foreach my $key (sort {$a <=> $b} (keys %{$sections{'plot'}})) {
-    print "$key: $sections{'plot'}{$key}\n";
+    print "Plot Node $key => Line $sections{'plot'}{$key}\n";
   }
   
   print "\nPress <ENTER> to continue...";

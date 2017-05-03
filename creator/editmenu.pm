@@ -30,8 +30,8 @@ sub EditMenu {
   
   while (1) {
     util::PrintAtPos('m', 't', "=== Creator Mode: Loaded $filename ===");
-    util::PrintAtPos('l', 2, "char: Show list of characters");
-    util::PrintAtPos('l', 3, "plot: Show plot information");
+    util::PrintAtPos('l', 2, "char: Enter characters menu");
+    util::PrintAtPos('l', 3, "plot: Enter plot menu");
     util::PrintAtPos('l', 4, "edit: Edit file in vim");
     util::PrintAtPos('l', 6, "quit: Quit to main menu");
   
@@ -57,7 +57,24 @@ sub EditMenu {
     } elsif ($resp eq "edit") {
       my $command = "vim " . $filename;
       system($command);
-      system("clear");
+
+      util::SetCursorPos('l', "bb");
+      print "Do you want to reload the file? (y/n) ";
+      my $rl_ans = <STDIN>;
+      chomp($rl_ans);
+
+      if ($rl_ans eq 'y') {
+        @file = reader::Import($filename, \%section);
+        %chars = reader::ImportChars(\@file, \%section);
+
+        util::SetCursorPos('l', "bb");
+        util::ClearLine();
+        util::PrintAtPos('l', "bb", "File successfully reloaded");
+        util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
+        <STDIN>;
+        util::SetCursorPos('l', 'b');
+        util::ClearLine();
+      }
     } else {
       util::SetCursorPos('l', "b");
       print "$resp: Invalid option";

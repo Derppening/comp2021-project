@@ -17,7 +17,7 @@ use reader::sceneselector;
 use util::terminal;
 
 sub VersionText {
-  print "Die Pfeilschwanzkrebse - Internal Build 20170501\n";
+  print "Die Pfeilschwanzkrebse - Internal Build 20170503\n";
   exit;
 }
 

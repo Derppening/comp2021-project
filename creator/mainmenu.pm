@@ -40,7 +40,6 @@ sub MainMenu {
         $filename = substr $resp, 5;
       }
       EditMenu($filename);
-      system("clear");
     } elsif ((substr $resp, 0, 4) eq "list") {
       my $path = "";
       if (length $resp < 5) {

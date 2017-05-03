@@ -1,7 +1,7 @@
 package reader;
 
 use strict;
-use warnings FATAL => 'all';
+use warnings 'FATAL' => 'all';
 
 use lib qw(..);
 
@@ -13,13 +13,13 @@ use Data::Dumper;
 # return: filename
 #
 sub SceneSelector {
-#  my $dir = "./";
-#  my @files = glob( $dir . '/*.txt' );
+  #  my $dir = "./";
+  #  my @files = glob( $dir . '/*.txt' );
   my $resp = "";
   my $numoffiles = 1;
 
   opendir my $dir, "./" or die "Cannot open directory: $!";
-  my @files = grep(/\.txt$/,readdir($dir));
+  my @files = grep(/\.txt$/, readdir($dir));
   closedir $dir;
 
   system("clear");
@@ -27,6 +27,9 @@ sub SceneSelector {
   print "=============Scene selection=============\n";
 
   foreach my $file (@files) {
+    if ($file eq "art.txt") {
+      next;
+    }
     print $numoffiles . ". " . $file . "\n";
     $numoffiles++;
   }

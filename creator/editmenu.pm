@@ -32,6 +32,13 @@ sub EditMenu {
     util::ClearLine();
 
     return;
+  } elsif ($filename eq "art.txt") {
+    util::PrintAtPos('l', 'b', "Cannot read from art file");
+    sleep(2);
+    util::SetCursorPos('l', 'b');
+    util::ClearLine();
+
+    return;
   }
 
   system("clear");
@@ -57,6 +64,7 @@ sub EditMenu {
     chomp($resp);
     
     if ($resp eq "quit") {
+      system("clear");
       last;
     } elsif ($resp eq "char") {
       system("clear");

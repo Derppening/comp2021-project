@@ -17,12 +17,24 @@ sub EditMenu {
   
   my $filename = $_[0];
   if ($_[0] eq "") {
+    util::SetCursorPos('l', 'bb');
     print "Enter file name to read from: ";
     $filename = <STDIN>;
     chomp($filename);
     util::SetCursorPos(0, 0);
     util::ClearLine();
   }
+
+  if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {
+    util::PrintAtPos('l', 'b', "Cannot read from $filename: $!");
+    sleep(2);
+    util::SetCursorPos('l', 'b');
+    util::ClearLine();
+
+    return;
+  }
+
+  system("clear");
   
   my %section;
   my @file = reader::Import($filename, \%section);

@@ -39,7 +39,6 @@ sub MainMenu {
       } else {
         $filename = substr $resp, 5;
       }
-      system("clear");
       EditMenu($filename);
       system("clear");
     } elsif ((substr $resp, 0, 4) eq "list") {
@@ -69,7 +68,7 @@ sub ListFiles {
 
   my $dir;
   if (!(opendir $dir, $path)) {
-    util::PrintAtPos('l', 'b', "$path: No such directory");
+    util::PrintAtPos('l', 'b', "Cannot read $path: $!");
     sleep(2);
     util::SetCursorPos('l', 'b');
     util::ClearLine();

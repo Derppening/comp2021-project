@@ -62,13 +62,13 @@ sub PlotMenu {
       } else {
         my $sstr = substr $resp, 5;
         if ($sstr =~ /\D/) {
-          util::PrintAtPos('l', "b", "$sstr is not a valid plot number.");
+          util::PrintAtPos('l', "b", "\"$sstr\" is not a valid plot number");
           sleep(2);
           util::SetCursorPos('l', "b");
           util::ClearLine();
           next;
         } elsif (!(exists $section{'plot'}{int($sstr)})) {
-          util::PrintAtPos('l', "b", "$sstr is not a valid plot number.");
+          util::PrintAtPos('l', "b", "$sstr: No such plot element");
           sleep(2);
           util::SetCursorPos('l', "b");
           util::ClearLine();
@@ -135,6 +135,15 @@ sub ShowPlot {
   my %section = %{$_[1]};
   my %chars = %{$_[2]};
   my $plotnum = $_[3];
+
+  if (!(exists $section{'plot'}{$plotnum})) {
+    util::PrintAtPos('l', 'b', "#$plotnum: No such plot element");
+    sleep(2);
+    util::SetCursorPos('l', 'b');
+    util::ClearLine();
+
+    return;
+  }
   
   system("clear");
   util::PrintAtPos('m', 't', "=== Creator Mode: Show Plot #$plotnum ===");

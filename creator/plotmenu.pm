@@ -118,7 +118,7 @@ sub ListPlot {
   util::SetCursorPos('l', 2);
   
   foreach my $key (sort {$a <=> $b} (keys %{$sections{'plot'}})) {
-    print "Plot Node $key => Line $sections{'plot'}{$key}\n";
+    print "Plot #$key => Line $sections{'plot'}{$key}\n";
   }
   
   print "\nPress <ENTER> to continue...";
@@ -137,7 +137,7 @@ sub ShowPlot {
   my $plotnum = $_[3];
   
   system("clear");
-  util::PrintAtPos('m', 't', "=== Creator Mode: Show Plot $plotnum ===");
+  util::PrintAtPos('m', 't', "=== Creator Mode: Show Plot #$plotnum ===");
   
   util::SetCursorPos('l', 2);
   

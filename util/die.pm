@@ -23,4 +23,14 @@ sub DieOpenFile {
   die $_[0], ": Cannot open file ", $_[1], ": ", $_[2], ".\n";
 }
 
+# Outputs a dying message due to directory opening
+#
+# var1: Function name
+# var2: Directory opening
+# var3: Error (usually $!)
+#
+sub DieOpenDir {
+  die $_[0], ": Cannot open directory ", $_[1], ": ", $_[2], ".\n";
+}
+
 1;

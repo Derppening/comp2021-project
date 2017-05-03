@@ -22,6 +22,8 @@ sub SceneSelector {
   my @files = grep(/\.txt$/,readdir($dir));
   closedir $dir;
 
+  system("clear");
+
   print "=============Scene selection=============\n";
 
   foreach my $file (@files) {
@@ -29,9 +31,22 @@ sub SceneSelector {
     $numoffiles++;
   }
 
-  print "\nWhich scenes file you would like to open? : ";
+  print "\nWhich scene file would you like to open? ";
   $resp = <STDIN>;
   chomp($resp);
+
+  if ($resp =~ /\D/) {
+    print "$resp: Not a valid file number";
+    sleep(2);
+    util::ClearLine();
+    return SceneSelector();
+  } elsif (int($resp) >= $numoffiles) {
+    print "$resp: Not a valid file number";
+    sleep(2);
+    util::ClearLine();
+    return SceneSelector();
+  }
+
   print "=========================================\n";
 
   return $files[$resp - 1];

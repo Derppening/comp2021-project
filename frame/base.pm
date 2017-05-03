@@ -13,7 +13,7 @@ use reader::readInput;
 package frame::base;
 
 sub welcome {
-  print "Welcome to the game. Choose an alternative by typing a number. \nPress q to quit the game. \n";
+  print "Welcome to the game. Select your choice by typing an option. \nPress q to quit the game. \n";
   
   util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
   util::SetCursorPos('r', 'b');
@@ -38,11 +38,11 @@ sub scene {
   my %section = %{$_[1]};
   my %char = %{$_[2]};
   
-  my $playerAns = "start";
+  my $playerAns = "";
   my %opinion;
   my $numAlt = 1; #Should be reset later on
   my $sceneInd = 1; #Should be reset later on
-  my $sceneText = "!!!!!!!Begin!!!!!!!!\n";
+  my $sceneText = "\n";
   
   while(lc($playerAns) ne "q"){
     system("clear");
@@ -64,7 +64,9 @@ sub scene {
       print "$playerAns: Invalid option";
       
       sleep(2);
-      
+
+      util::SetCursorPos('l', 'b');
+      util::ClearLine();
       util::SetCursorPos('l', 'bb');
       util::ClearLine();
       util::SetCursorPos('l', "bb");
@@ -74,7 +76,9 @@ sub scene {
     }
     
     if ($sceneInd eq 0) {
-      print "Hope you enjoy the game. Bye :D\n";
+      print "Hope you enjoy the game. Bye :D";
+      sleep(2);
+      system("clear");
       last;
     }
     system("clear");

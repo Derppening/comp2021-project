@@ -65,16 +65,11 @@ Suddenly you feel a slap in your face.
 (opt="Wake up",g,9)
 (opt="Pretend to continue sleeping",c,12)
 
-11. 	
-Suddenly you feel a slap in your face.
-(opt="Wake up",g,9)
-(opt="Pretend to continue sleeping",c,12)
-
-11. 	
+12.
 You hear someone leave the room.
 (opt="Continue sleeping",c,42)
 
-12. # Dummy for (11)
+13. # Dummy for (12)
 
 42.
 Game is over. Did you win? 

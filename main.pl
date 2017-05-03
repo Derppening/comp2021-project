@@ -72,6 +72,11 @@ sub main {
 
   $filename = reader::SceneSelector() if ($filename eq "");
 
+  if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {
+    print "Cannot read from $filename: $!\n";
+    exit;
+  }
+
   my %section;
   my @file = reader::Import($filename, \%section);
   my %chars = reader::ImportChars(\@file, \%section);

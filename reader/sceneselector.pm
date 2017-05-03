@@ -30,8 +30,7 @@ sub SceneSelector {
     if ($file eq "art.txt") {
       next;
     }
-    print $numoffiles . ". " . $file . "\n";
-    $numoffiles++;
+    print $numoffiles++ . ". " . $file . "\n";
   }
 
   print "\nWhich scene file would you like to open? ";

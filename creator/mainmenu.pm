@@ -84,6 +84,9 @@ sub ListFiles {
   util::SetCursorPos('l', 2);
 
   foreach my $file (@files) {
+    if ($file eq "art.txt") {
+      next;
+    }
     print "$file\n";
   }
 

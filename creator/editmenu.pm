@@ -21,8 +21,6 @@ sub EditMenu {
     print "Enter file name to read from: ";
     $filename = <STDIN>;
     chomp($filename);
-    util::SetCursorPos(0, 0);
-    util::ClearLine();
   }
 
   if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {

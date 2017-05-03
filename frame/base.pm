@@ -64,7 +64,7 @@ sub scene {
       print "$playerAns: Invalid option";
       
       sleep(2);
-
+      
       util::SetCursorPos('l', 'b');
       util::ClearLine();
       util::SetCursorPos('l', 'bb');

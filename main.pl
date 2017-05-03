@@ -7,7 +7,6 @@ use Data::Dumper;
 
 use lib '.';
 
-# This statement loads the file dummy/hello_world.pm
 use creator::mainmenu;
 use frame::base;
 use reader::import;
@@ -16,11 +15,15 @@ use reader::readplot;
 use reader::sceneselector;
 use util::terminal;
 
+# Displays the version text and quits
+#
 sub VersionText {
   print "Die Pfeilschwanzkrebse - Internal Build 20170503\n";
   exit;
 }
 
+# Displays the help text and exits
+#
 sub HelpText {
   print "Usage: perl main.pl [OPTION]... [FILE]\n";
   print "\n";
@@ -32,6 +35,12 @@ sub HelpText {
   exit;
 }
 
+# Main Function
+#
+# Acts as a pseudo-entry point to the program
+#
+# var: Flattened array of command line arguments
+#
 sub main {
   # A C-like main function as the entry point.
   # argc and argv meaning "argument count" and "argument vector"
@@ -58,32 +67,33 @@ sub main {
       $filename = $arg;
     }
   }
-
+  
+  # check if program is entering creator mode
   if ($creator == 1) {
     creator::MainMenu($filename);
-
+    
     util::PrintAtPos('l', 'b', "Press <ENTER> to continue...");
     util::SetCursorPos('r', 'b');
     <STDIN>;
     system("clear");
-
+    
     exit;
   }
-
+  
+  # call SceneSelector module if user didn't supply a scene
   $filename = reader::SceneSelector() if ($filename eq "");
-
+  
+  # make sure we could open the file, and give a friendly message if we can't
   if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {
     print "Cannot read from $filename: $!\n";
     exit;
   }
-
+  
+  # inflate the scene file
   my %section;
   my @file = reader::Import($filename, \%section);
   my %chars = reader::ImportChars(\@file, \%section);
   
-#  my %hash = reader::ReadPlot(\@file, \%section, \%chars, 1);
-
-  # tests:
   frame::base::welcome();
   frame::base::scene(\@file, \%section, \%chars);
 }

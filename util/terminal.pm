@@ -77,6 +77,7 @@ sub SetCursorPos {
   my $w;
   my $h;
   
+  # check if $w and $h are supplied with correct arguments
   if ($_[0] =~ /\D/) {
     if ($_[0] eq "l") {
       $w = 0;
@@ -140,6 +141,7 @@ sub PrintAtPos {
   
   (my $term_w, my $term_h) = GetTermSize();
   
+  # check if $w and $h are supplied with correct arguments
   if ($_[0] =~ /\D/) {
     if ($_[0] eq "l") {
       $w = 0;

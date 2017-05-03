@@ -45,10 +45,12 @@ sub ReadPlot {
     $line =~ s/\$([\d]+)/$chars{$1}/g;
     if ($line =~ /^#.*/) {
       next;
-    } elsif ($line =~ /\(art=.+\)/) {  # art
+    } elsif ($line =~ /\(art=.+\)/) {
+      # art
       $line =~ s/\(art=(.+)\)/$1/;
       ReadArt($line);
-    } elsif ($line =~ /^\(opt=.+\)/) {  # option
+    } elsif ($line =~ /^\(opt=.+\)/) {
+      # option
       $line =~ s/\(opt=(.+)\)/$1/;
       my @array = split /,/, $line;
       $array[0] =~ s/\"//g;

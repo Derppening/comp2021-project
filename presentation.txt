@@ -11,26 +11,119 @@ Klara
 1.
     (art=hkust)
     Welcome to our presentation.
-        (opt="Group intro",1,2)
-        (opt="Project Introduction",2,4)
+        (opt="Introduction",1,2)
+        (opt="System Structure",2,5)
+        (opt="Modules",3,6)
+        (opt="Demo",4,7)
 
-2. Statement 1A
+
+2. Introduction 1A
     We are Group 12, named "Die Pfeilschwanzkrebse".
-       	(opt="What is that means?",1,3)
-	    (opt="About members",2,4)
-       	(opt="Cool.",3,1)
 
-3. Statement 1B
-    Die Pfeilschwanzkrebse is comes from ………
-	(opt="Emm……OK.",1,2)
-	(opt="About members",2,4)
+    There are 3 members:
+    $1 is Year 1 student, from Hong Kong.
+    $2 is Year 4 CPEG student, from Hong Kong.
+    $3 is year 4 Exchange student, from .
 
-4. Statement 1C
-    We have 3 members, $1, $2, $3.
-    $1 is Year 1 student.
-    $2 is Year 4 CPEG student.
-    $3 is year 4 Exchange student.
-	(opt="Great!.",1,2)
+    (opt="About Project",1,3)
+    (opt="Go Back",2,1)
 
-5. Statement 2
+3. Project Idea 1B
+    This project is comes from the idea of RPG game. ...
+
+    (opt="System Structure",1,4)
+    (opt="go Back.",2,1)
+
+4. System Structure 2
+    Project Modules
+    |----creator
+    |----frame
+    |----reader
+    |----util
+
+    (opt="creator",1,5)
+    (opt="frame",2,6)
+    (opt="reader",3,7)
+    (opt="util",4,8)
+
+5. System Structure - creator 2A
+    1.creator
+    |----charmenu.pm
+    |----editmenu.pm
+    |----mainmenu.pm
+    |----plotmenu.pm
+
+
+    (opt="frame",2,6)
+    (opt="reader",3,7)
+    (opt="util",4,8)
+
+6.  System Structure - frame 2B
+    2.frame
+        |----base.pm
+        |----gameHandler.pm
+
+    (opt="creator",1,5)
+    (opt="reader",3,7)
+    (opt="util",4,8)
+
+7.  System Structure - reader 2C
+    3.reader
+        |----import.pm
+        |----importchars.pm
+        |----readInput.pm
+        |----readplot.pm
+        |----sceneselector.pm
+
+    (opt="creator",1,5)
+    (opt="frame",2,6)
+    (opt="util",4,8)
+
+8.  System Structure - util 2D
+    4.util
+    |----die.pm
+    |----terminal.pm
+
+    (opt="creator",1,5)
+    (opt="frame",2,6)
+    (opt="reader",3,7)
+    (opt="Go to details",4,9)
+
+9.  Modules 3
+    This section will introduct what functions we have to build the system.
+
+    Please select the module you want to know more :
+    (opt="creator",1,10)
+    (opt="frame",2,11)
+    (opt="reader",3,12)
+    (opt="util",4,13)
+
+10. Modules - creator 3A
+    charmenu.pm
+        |-  void CharsMenu(/%Character);
+        |-  void ShowChars(/%Character);
+
+    editmenu.pm
+        |-  void EditMenu($Scene_FileName);
+
+    mainmenu.pm
+        |-  void MainMenu($Scene_FileName);
+        |-  void ListFiles($Directory);
+
+    plotmenu.plotmenu
+        |-  void PlotMenu(@FileContent,%Section, %Character, $CurrentScene);
+        |-  void ListPlot(%Section);
+
+    (opt="frame",1,11)
+    (opt="reader",2,12)
+    (opt="util",3,13)
+    (opt="Demo",4,14)
+
+11. Modules - frame 3B
+    |-  base.pm
+        |-  void welcome();
+        |-  int isAns(/%Character);
+    |-  gameHandler.pm
+        |-  void EditMenu($Scene_FileName);
+
     (end)

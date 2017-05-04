@@ -31,64 +31,78 @@ The Old Man
 	(opt="Walk out of the sitting out area",n,6)
 
 3. 
-You find three keys connected to a tiny Totoro figure in your right pocket. 86 dollars in cash in your left.
+    You find three keys connected to a tiny Totoro figure in your right pocket.
+    86 dollars in cash in your left.
 
-(opt="Buy a beer",b,5)
-(opt="Walk out of the sitting out area",w,4)
+    (opt="Buy a beer",b,5)
+    (opt="Walk out of the sitting out area",w,4)
 
 4. 	
-You recognize your house, go home and get back to sleep. 
-(opt="Continue sleeping",c,42)	
+    You recognize your house, go home and get back to sleep.
+
+    (opt="Continue sleeping",c,42)
 	
 5. 
-You are thirsty, and longing for a beer. When you see the bottle everything returns. 
-(opt="Go home and continue sleeping",g,6)
+    You are thirsty, and longing for a beer. When you see the bottle everything
+    returns.
+
+    (opt="Go home and continue sleeping",g,6)
 
 6. 	
-You hear an alarm clock beeping in a distance.
-(opt="Wake up",g,9)
-(opt="Continue sleeping",c,7)
+
+    You hear an alarm clock beeping in a distance.
+
+    (opt="Wake up",g,9)
+    (opt="Continue sleeping",c,7)
 
 7. 	
-You still hear an alarm clock beeping in a distance.
-(opt="Wake up",g,9)
-(opt="Continue sleeping",c,8)
+    You still hear an alarm clock beeping in a distance.
+
+    (opt="Wake up",g,9)
+    (opt="Continue sleeping",c,8)
 
 8. 	
-You continue hear an alarm clock beeping in a distance.
-(opt="Wake up",g,9)
-(opt="Continue sleeping",c,10)
+    You continue hear an alarm clock beeping in a distance.
+
+    (opt="Wake up",g,9)
+    (opt="Continue sleeping",c,10)
 
 9.
-You open your eyes. A new day begins.
-(opt="Sing your morning song",s,42)
+    You open your eyes. A new day begins.
+
+    (opt="Sing your morning song",s,42)
 
 10. 	
-The alarm doesn't stop beeping. 
-(opt="Wake up",g,9)
-(opt="Continue sleeping",c,11)
+    The alarm doesn't stop beeping.
+
+    (opt="Wake up",g,9)
+    (opt="Continue sleeping",c,11)
 
 11. 	
-Suddenly you feel a slap in your face.
-(opt="Wake up",g,9)
-(opt="Pretend to continue sleeping",c,12)
+    Suddenly you feel a slap in your face.
+
+    (opt="Wake up",g,9)
+    (opt="Pretend to continue sleeping",c,12)
 
 12.
-You hear someone leave the room.
-(opt="Continue sleeping",c,42)
+    You hear someone leave the room.
+
+    (opt="Continue sleeping",c,42)
 
 13. # Dummy for (12)
 
 42.
-Game is over. Did you win? 
-(opt="Yes",y,100)
-(opt="NO",n,100)
+    Game is over. Did you win?
+
+    (opt="Yes",y,100)
+    (opt="NO",n,100)
 
 43. # Dummy for (42)
 
 100.
-Thank you for playing this game!
-(opt="Quit",q,100)
+    Thank you for playing this game!
+
+    (opt="Quit",q,100)
 
 #Possible endings
 #- Aliens

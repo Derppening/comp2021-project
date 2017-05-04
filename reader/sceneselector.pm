@@ -35,12 +35,12 @@ sub SceneSelector {
   chomp($resp);
 
   if ($resp =~ /\D/) {
-    print "$resp: Not a valid file number";
+    print "$resp: Not a valid file number\n";
     sleep(2);
     util::ClearLine();
     return SceneSelector();
-  } elsif (int($resp) > $numoffiles) {
-    print "$resp: Not a valid file number";
+  } elsif (int($resp) > $numoffiles || int($resp) < 1) {
+    print "$resp: Not a valid file number\n";
     sleep(2);
     util::ClearLine();
     return SceneSelector();

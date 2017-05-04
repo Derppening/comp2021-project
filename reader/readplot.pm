@@ -33,7 +33,7 @@ sub ReadPlot {
   {
     my $end = exists $sections{'plot'}{$plotnum + 1} ? $sections{'plot'}{$plotnum + 1} : scalar(@file);
     for (my $i = $sections{'plot'}{$plotnum} + 1; $i < $end; ++$i) {
-      push @plot, $file[$i] if ($file[$i] ne "");  # ignore all empty lines
+      push @plot, $file[$i];
     }
   }
   

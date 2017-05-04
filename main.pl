@@ -18,7 +18,7 @@ use util::terminal;
 # Displays the version text and quits
 #
 sub VersionText {
-  print "Die Pfeilschwanzkrebse - Internal Build 20170503\n";
+  print "Die Pfeilschwanzkrebse - Internal Build 20170504\n";
   exit;
 }
 

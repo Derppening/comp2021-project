@@ -184,7 +184,7 @@ sub ShowPlot {
   {
     my $end = exists $section{'plot'}{$plotnum + 1} ? $section{'plot'}{$plotnum + 1} : scalar(@file);
     for (my $i = $section{'plot'}{$plotnum} + 1; $i < $end; ++$i) {
-      push @plot, $file[$i] if ($file[$i] ne "");  # ignore all empty lines
+      push @plot, $file[$i];
     }
   }
   

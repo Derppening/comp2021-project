@@ -16,10 +16,10 @@ sub SceneSelector {
   #  my $dir = "./";
   #  my @files = glob( $dir . '/*.txt' );
   my $resp = "";
-  my $numoffiles = 1;
+  my $numoffiles = 0;
 
   opendir my $dir, "./" or die "Cannot open directory: $!";
-  my @files = grep(/\.txt$/, readdir($dir));
+  my @files = grep(/[^art]\.txt$/, readdir($dir));
   closedir $dir;
 
   system("clear");
@@ -27,10 +27,7 @@ sub SceneSelector {
   print "=============Scene selection=============\n";
 
   foreach my $file (@files) {
-    if ($file eq "art.txt") {
-      next;
-    }
-    print $numoffiles++ . ". " . $file . "\n";
+    print ++$numoffiles . ". " . $file . "\n";
   }
 
   print "\nWhich scene file would you like to open? ";
@@ -42,7 +39,7 @@ sub SceneSelector {
     sleep(2);
     util::ClearLine();
     return SceneSelector();
-  } elsif (int($resp) >= $numoffiles) {
+  } elsif (int($resp) > $numoffiles) {
     print "$resp: Not a valid file number";
     sleep(2);
     util::ClearLine();

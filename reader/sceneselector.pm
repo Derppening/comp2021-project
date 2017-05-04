@@ -51,7 +51,7 @@ sub SceneSelector {
 
   print "=========================================\n";
 
-  return $files[$resp];
+  return $files[$resp - 1];
 }
 
 

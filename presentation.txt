@@ -2,6 +2,7 @@
 David
 Jackson
 Klara
+Bob
 
 [glob_var]
 
@@ -10,7 +11,10 @@ Klara
 [plot]
 1.
     (art=hkust)
-    Welcome to our presentation.
+    
+    $4 - a tool for making text based games
+
+    Github Link: https://github.com/Derppening/comp2021-project
         (opt="Introduction",1,2)
         (opt="System Structure",2,4)
         (opt="Challenges",3,5)

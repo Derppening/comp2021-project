@@ -1,3 +1,8 @@
+# creator/editmenu.pm
+#
+# Manages all menus after loading a scene file in Creator Mode
+#
+
 package creator;
 
 use strict;

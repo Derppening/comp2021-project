@@ -1,3 +1,8 @@
+# reader/readplot.pm
+#
+# Reads plot elements or ASCII art.
+#
+
 package reader;
 
 use strict;
@@ -11,10 +16,10 @@ use open ':std', ':encoding(UTF-8)';
 
 # Interprets and outputs the plot to stdout
 #
-# var1: (Reference of) File content array
-# var2: (Reference of) Sections hash
-# var3: (Reference of) Characters hash
-# var4: Plot point number
+# arg1: (Reference of) File content array
+# arg2: (Reference of) Sections hash
+# arg3: (Reference of) Characters hash
+# arg4: Plot point number
 #
 # return: Hash containing possible choices
 #
@@ -67,7 +72,7 @@ sub ReadPlot {
 
 # Displays the ASCII art from art.txt (currently hardcoded)
 #
-# var1: Tag of artwork
+# arg1: Tag of artwork
 #
 sub ReadArt {
   if (scalar(@_) != 1) {

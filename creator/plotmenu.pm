@@ -1,3 +1,13 @@
+# creator/plotmenu.pm
+#
+# Manages all menus related to plot in Creator Mode
+#
+# Currently supports the following functionality:
+# - Show plot by element
+# - List all plot elements in file
+# - Edit a plot by element (in vim)
+#
+
 package creator;
 
 use strict;
@@ -10,10 +20,10 @@ use util::die;
 
 # Plot Menu in Creator Mode
 #
-# var1: (Reference of) File content array
-# var2: (Reference of) Sections hash
-# var3: (Reference of) Characters hash
-# var4: Filename of currently loaded scene
+# arg1: (Reference of) File content array
+# arg2: (Reference of) Sections hash
+# arg3: (Reference of) Characters hash
+# arg4: Filename of currently loaded scene
 #
 sub PlotMenu {
   if (scalar(@_) != 4) {
@@ -127,7 +137,7 @@ sub PlotMenu {
 
 # Lists all nodes of the scene
 #
-# var1: (Reference to) hash of sections
+# arg1: (Reference to) hash of sections
 sub ListPlot {
   if (scalar(@_) != 1) {
     util::DieArgs("creator::ListPlot()", 1, scalar(@_));
@@ -151,10 +161,10 @@ sub ListPlot {
 
 # Show all attributes of a given plot element
 #
-# var1: (Reference of) File content array
-# var2: (Reference of) Sections hash
-# var3: (Reference of) Characters hash
-# var4: Plot element number
+# arg1: (Reference of) File content array
+# arg2: (Reference of) Sections hash
+# arg3: (Reference of) Characters hash
+# arg4: Plot element number
 #
 sub ShowPlot {
   if (scalar(@_) != 4) {

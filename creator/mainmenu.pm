@@ -1,3 +1,8 @@
+# creator/mainmenu.pm
+#
+# Manages all menus before loading a scene file in Creator Mode
+#
+
 package creator;
 
 use strict;
@@ -11,7 +16,7 @@ use util::terminal;
 
 # Main menu to Creator Mode
 #
-# var1: Filename to a scene file. Empty if user did not specify one.
+# arg1: Filename to a scene file. Empty if user did not specify one.
 #
 sub MainMenu {
   if (scalar(@_) != 1) {

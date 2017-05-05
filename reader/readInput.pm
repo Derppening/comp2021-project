@@ -1,27 +1,27 @@
-package reader;
+# reader/readInput.pm
+#
+# Interfaces between the base game and the plot reading functionality.
+#
 
-#use strict;
-#use warnings FATAL => 'all';
+package reader;
 
 use strict;
 use warnings FATAL => 'all';
 
 use lib qw(..);
 
-use Data::Dumper;
 use util::die;
 use reader::import;
 
 # Read input from users and return options hash table
 #
-# var1: (Reference of) File content array
-# var2: Hash of section
-# var3: Hash of characters
-# var4: Current scene id
+# arg1: (Reference of) File content array
+# arg2: Hash of section
+# arg3: Hash of characters
+# arg4: Current scene id
 #
 # return: Hash of option in current plot
 #
-#$sceneText = reader::import::??(\@file,$playerAns,$sceneInd); # Something like this
 sub readInput {
   my @file = @{$_[0]};
   my %section = %{$_[1]};
@@ -35,8 +35,8 @@ sub readInput {
 
 # Return the plot number according to the options
 #
-# var1: Hash of option in current plot
-# var2: User answer
+# arg1: Hash of option in current plot
+# arg2: User answer
 #
 # return: Cooresponding plot number
 sub goPlot {

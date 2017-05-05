@@ -1,4 +1,8 @@
-# Package declaration
+# frame/base.pm
+#
+# Manages the general gameplay.
+#
+
 package frame::base;
 
 use strict;

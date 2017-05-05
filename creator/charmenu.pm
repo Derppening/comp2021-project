@@ -1,3 +1,11 @@
+# creator/charmanu.pm
+#
+# Manages all menus related to Characters in Creator Mode
+#
+# Currently supports the following functionality:
+# - Listing all characters
+#
+
 package creator;
 
 use strict;

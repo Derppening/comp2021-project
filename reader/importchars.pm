@@ -1,3 +1,8 @@
+# reader/importchars.pm
+#
+# Manages the importing of characters for a scene file.
+#
+
 package reader;
 
 use strict;
@@ -7,8 +12,8 @@ use Data::Dumper;
 
 # Imports character names into a hash
 #
-# var1: (Reference of) File contents array
-# var2: (Reference of) Sections hash
+# arg1: (Reference of) File contents array
+# arg2: (Reference of) Sections hash
 #
 # return: Hash of characters
 #

@@ -1,3 +1,9 @@
+# main.pl
+#
+# This file manages the program arguments, the initialization of the scene file,
+# and loads the game in normal mode.
+#
+
 #!/usr/bin/perl
 
 use strict;
@@ -40,7 +46,7 @@ sub HelpText {
 #
 # Acts as a pseudo-entry point to the program
 #
-# var: Flattened array of command line arguments
+# arg1: Flattened array of command line arguments
 #
 sub main {
   # A C-like main function as the entry point.

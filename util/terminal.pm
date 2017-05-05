@@ -1,3 +1,10 @@
+# util/terminal.pm
+#
+# Provides interfaces to manipulate the cursor of terminals
+#
+# Note: This file uses Term::ReadKey, which may not be installed by default.
+#
+
 package util;
 
 use strict;

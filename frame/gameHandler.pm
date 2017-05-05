@@ -1,3 +1,8 @@
+# frame/gameHandler.pm
+#
+# Manages the save/load feature of the game.
+#
+
 package frame::gameHandler;
 
 use strict;
@@ -9,6 +14,11 @@ use lib qw(..);
 
 use util::die;
 
+# Prompts the user for a filename, then saves a copy of the current state of
+# the game.
+#
+# arg1: (Reference of) hash to all data which should be saved
+#
 sub SaveGame {
   if (scalar(@_) != 1) {
     util::DieArgs("frame::gameHandler::SaveGame()", 1, scalar(@_));
@@ -16,6 +26,8 @@ sub SaveGame {
   
   my %data = %{$_[0]};
   my @data;
+  
+  # convert the hash into an array
   foreach my $entry (keys %data) {
     if ($entry eq "savefile") {
       next;
@@ -41,6 +53,7 @@ sub SaveGame {
   my $filename = <STDIN>;
   chomp($filename);
   
+  # check if the file already exists
   if (open(my $filecheck, "$filename.sav")) {
     util::SetCursorPos('l', 5);
     util::ClearLine();
@@ -55,6 +68,7 @@ sub SaveGame {
     }
   }
   
+  # add the filename to the savefile
   $filename = $filename.".sav";
   push @data, "savefile=$filename";
   WriteToFile($filename, \@data);
@@ -63,6 +77,11 @@ sub SaveGame {
   return 0;
 }
 
+# Low-level handler to write data into a file
+#
+# arg1: Filename to write to
+# arg2: (Reference of) array of line to write
+#
 sub WriteToFile {
   if (scalar(@_) != 2) {
     util::DieArgs("frame::gameHandler::WriteToFile()", 2, scalar(@_));
@@ -79,6 +98,12 @@ sub WriteToFile {
   close($fh);
 }
 
+# Low-level handler to read data from a file
+#
+# arg1: Filename to read from
+#
+# return: Array of lines present in the file
+#
 sub ReadFromFile {
   if (scalar(@_) != 1) {
     util::DieArgs("frame::gameHandler::ReadFromFile()", 1, scalar(@_));
@@ -97,6 +122,11 @@ sub ReadFromFile {
   return @lines;
 }
 
+# Prompt the user to choose a savefile to load from, then loads the saved
+# state of the game from the file.
+#
+# return; Hash of the attributes of the saved game
+#
 sub LoadGame {
   if (scalar(@_) != 0) {
     util::DieArgs("frame::gameHandler::LoadGame()", 0, scalar(@_));
@@ -155,6 +185,10 @@ sub LoadGame {
   return %data;
 }
 
+# Retrieve a list of all saved games under "./saves"
+#
+# return: Array of filenames under "./saves"
+#
 sub GetSaves {
   if (scalar(@_) != 0) {
     util::DieArgs("frame::gameHandler::ListSaves()", 0, scalar(@_));
@@ -173,6 +207,10 @@ sub GetSaves {
   return @saves;
 }
 
+# Low-level handler to delete a savefile from "./saves"
+#
+# arg1: Filename to the to-be-removed savefile
+#
 sub DeleteSave {
   if (scalar(@_) != 1) {
     util::DieArgs("frame::gameHandler::DeleteSave()", 1, scalar(@_));

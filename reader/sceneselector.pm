@@ -1,3 +1,9 @@
+# reader/sceneselector.pm
+#
+# Provides a GUI for the user to choose which scene or savefile they want
+# to load from.
+#
+
 package reader;
 
 use strict;
@@ -7,7 +13,6 @@ use lib qw(..);
 
 use frame::gameHandler;
 use util::die;
-use Data::Dumper;
 
 # Choose to read which files
 #

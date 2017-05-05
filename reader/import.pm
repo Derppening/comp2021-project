@@ -1,3 +1,11 @@
+# reader/import.pm
+#
+# Manages the parsing of the scene file.
+#
+# Currently, the parsing works by reading a file, then creating a hash of
+# plot elements, as well as an array of all the lines in the file.
+#
+
 package reader;
 
 use strict;
@@ -10,8 +18,8 @@ use Data::Dumper;
 
 # Reads from a file
 #
-# var1: Filename to import from
-# var2: Hash to write section headers to
+# arg1: Filename to import from
+# arg2: Hash to write section headers to
 #
 # return: Array containing all lines of the file
 #

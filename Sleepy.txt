@@ -1,7 +1,7 @@
 [characters]
 # character starts with index 1
 Player
-The Old Man
+An old man
 
 [glob_var]
 
@@ -17,7 +17,7 @@ The Old Man
     "Canton Road/Dundas Street sitting out area".
 
     The metal bench you are sitting on has been warmed by the sun. You are
-    wearing grey jogging pants and a white t-shirt. An old man is sitting
+    wearing grey jogging pants and a white t-shirt. $2 is sitting
     next to you.
 
     (opt="Talk to the old man",talk,2)

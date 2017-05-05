@@ -8,8 +8,6 @@ package reader;
 use strict;
 use warnings FATAL => 'all';
 
-use Data::Dumper;
-
 # Imports character names into a hash
 #
 # arg1: (Reference of) File contents array

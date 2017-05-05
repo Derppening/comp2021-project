@@ -8,8 +8,6 @@ package frame::gameHandler;
 use strict;
 use warnings 'FATAL' => 'all';
 
-use Data::Dumper;
-
 use lib qw(..);
 
 use util::die;

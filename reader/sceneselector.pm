@@ -19,8 +19,6 @@ use util::die;
 # return: filename
 #
 sub SceneSelector {
-  #  my $dir = "./";
-  #  my @files = glob( $dir . '/*.txt' );
   my $resp = "";
   my $numoffiles = 0;
 

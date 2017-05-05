@@ -10,7 +10,6 @@ use warnings FATAL => 'all';
 
 use lib qw(..);
 
-use Data::Dumper;
 use util::die;
 use open ':std', ':encoding(UTF-8)';
 

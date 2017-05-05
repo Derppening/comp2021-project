@@ -30,9 +30,9 @@ sub HelpText {
   print "\n";
   print "With no FILE, will prompt user to choose one.\n";
   print "\n";
-  print "  -c, --creator\tuse creator mode\n";
-  print "      --help\tdisplay this help and exit\n";
-  print "      --version\toutput version information and exit\n";
+  print "  -c, --creator\t\tuse creator mode\n";
+  print "      --help\t\tdisplay this help and exit\n";
+  print "      --version\t\toutput version information and exit\n";
   exit;
 }
 

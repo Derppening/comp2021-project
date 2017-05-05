@@ -25,8 +25,9 @@ sub SceneSelector {
 
   system("clear");
 
-  print "=============Scene selection=============\n";
+  util::PrintAtPos('m', 't', "=== Scene Selection ===");
 
+  util::SetCursorPos('l', 2);
   print "Start a new story from an existing plot: \n\n";
 
   foreach my $file (@files) {

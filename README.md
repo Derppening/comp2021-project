@@ -22,7 +22,7 @@ perl main.pl --version
 
 The output should look something like this:
 ```
-Die Pfeilschwanzkrebse 1.0.0
+Bob 1.0.0
 ```
 
 If you see the above output, you're ready to go!

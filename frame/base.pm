@@ -1,16 +1,13 @@
-#!/usr/bin/perl
+# Package declaration
+package frame::base;
 
 use strict;
 use warnings FATAL => 'all';
 
 use lib qw(..);
 
-#use Scalar::Util qw(looks_like_number);
 use reader::import;
 use reader::readInput;
-
-# Package declaration
-package frame::base;
 
 sub welcome {
   if (!exists $_[0]) {

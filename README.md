@@ -1,9 +1,7 @@
-# Die Pfeilschwanzkrebse 
+# Bob 
 
 A Perl-based framework for text-based role-playing game, supporting non-linear
 gameplay.
-
-Also known as "The Horseshoe Crab", or "COMP2021 Project - Group 12".
 
 ## Getting Started
 

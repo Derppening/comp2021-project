@@ -9,6 +9,7 @@ use lib '.';
 
 use creator::mainmenu;
 use frame::base;
+use frame::gameHandler;
 use reader::import;
 use reader::importchars;
 use reader::readplot;
@@ -18,7 +19,7 @@ use util::terminal;
 # Displays the version text and quits
 #
 sub VersionText {
-  print "Die Pfeilschwanzkrebse - Internal Build 20170504\n";
+  print "Die Pfeilschwanzkrebse - Internal Build 20170505\n";
   exit;
 }
 
@@ -80,22 +81,43 @@ sub main {
     exit;
   }
   
-  # call SceneSelector module if user didn't supply a scene
-  $filename = reader::SceneSelector() if ($filename eq "");
+  # tests, tb removed
+#  my @dummy = ("Hello", "World!");
+#  frame::gameHandler::SaveGame(\@dummy);
   
+#  @dummy = frame::gameHandler::GetSaves();
+  
+#  frame::gameHandler::LoadGame();
+  
+#  exit;
+  
+  # call SceneSelector module if user didn't supply a scene
+  my %data = reader::SceneSelector() if ($filename eq "");
+  if (!(exists $data{'scenefile'})) {
+    print "Selected file is not a valid scene file!\n";
+    exit;
+  }
+  $filename = $data{'scenefile'};
+
   # make sure we could open the file, and give a friendly message if we can't
   if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {
     print "Cannot read from $filename: $!\n";
     exit;
   }
-  
+
   # inflate the scene file
   my %section;
   my @file = reader::Import($filename, \%section);
   my %chars = reader::ImportChars(\@file, \%section);
-  
-  frame::base::welcome();
-  frame::base::scene(\@file, \%section, \%chars);
+
+  if (exists $data{'savefile'}) {
+    print "Loaded game from $data{'savefile'}";
+    delete($data{'savefile'});
+    sleep(2);
+  } else {
+    frame::base::welcome();
+  }
+  frame::base::scene(\@file, \%section, \%chars, \%data);
 }
 
 # Program Entry Point

@@ -28,7 +28,6 @@ sub MainMenu {
     util::PrintAtPos('l', 5, "quit: Quit");
     util::SetCursorPos('l', "bb");
     util::ClearLine();
-    util::SetCursorPos('l', "bb");
     print ": ";
     
     my $resp = "";

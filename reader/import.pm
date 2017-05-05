@@ -47,7 +47,6 @@ sub Import {
   
   {
     # find the range of the plot
-    # TODO(Derppening): split into another function
     my $plot_end = 0;
     foreach my $i (@section_lines) {
       if ($i > $sections{'plot'}) {

@@ -1,144 +1,192 @@
-#!/usr/bin/perl
-
-use strict;
-use warnings;
-#use Data::Dumper;
-use lib qw(..);
-use util::die;
-
 package frame::gameHandler;
 
+use strict;
+use warnings 'FATAL' => 'all';
 
-# todo:? set permissions(or modify somehow) so that you can't manipulate the savefiles by editing them in usual text editors
-# todo: add content of saves directory to gitignore
-# todo: let user input file name etc...
-# todo: think about different cases and make them stupid-user-proof
+use Data::Dumper;
 
-# save variables into textfile
-#
-# arg 0: filename without .sav
-# arg 1: sceneNumber
-# ...
-# arg x: player status
-# ...
-# output: none
+use lib qw(..);
 
-sub saveVar{
-  if (-e '..\saves' and -d '..\saves') {
-    chdir '..\saves';
-  }
-  else {
-    chdir '..';
-    mkdir 'saves';
-    chdir 'saves';
-  }
-  if (open(my $checkfile, "$_[0].sav")) {
-    print "The file $_[0].sav already exists. Do you want to overwrite it? (y/n)\n";
-    close ($checkfile);
-    chomp(my $playerAns = <STDIN>);
-    if (lc($playerAns) ne "y") {
-      return 0;
-    }
-  }
-  my $outfile;
-  open ($outfile, ">$_[0].sav");
-  print $outfile "asjdf\n";
-  for (my $i = 1; $i < scalar(@_); $i++) {
-    print $outfile "$_[$i]\n";
-  }
-  close ($outfile);
-  chdir '..\frame';
-}
+use util::die;
 
-# read lines from file and put into array
-#
-# arg 0: filename without.sav
-# 
-# output: array with lines
-
-sub openFile{
-  chdir '..\saves';
-  my @content;
-  #open(my $INFILE, "$_[0]") or
-  #warn "$0: open $_[0]: $!";
-  if (open(my $INFILE, "$_[0].sav")) {
-    while(<$INFILE>){
-      chomp;
-      push @content, $_;
-    }
-    close($INFILE);
-  }
-  else {
-    warn "$0: open $_[0].sav: $!";
-  }
-  chdir '..\frame';
-  return @content;
-}
-
-# put the content of the save file into relevant game variables (this far only $sceneInd)
-#
-# arg 0: filename without .sav
-# arg 1: reference to $sceneInd
-# ...
-#
-# output: none
-
-sub loadGame {
-  my @content = openFile($_[0]);
-  my $sceneInd_ref = $_[1];
-  $$sceneInd_ref = $content[0];
-}
-
-
-# delete a given save from the saves directory
-#
-# arg 0: filename without .sav
-#
-# output: none
-sub deleteGame {
-  chdir '..\saves';
-  unlink "$_[0].sav" or warn "Could not delete $_[0]: $!";
-  chdir '..\frame';
-}
-
-# print out all .sav files in the saves directory
-#
-# arguments: none
-#
-# output: none
-
-sub printSaves{
-  my $dir;
-  opendir($dir, '..\saves') or die "can't opendir saves: $!";
-  my @saves = grep { /.+sav/} readdir($dir);
-  closedir $dir;
-  for my $item (@saves) {
-    print "$item\n";
+sub SaveGame {
+  if (scalar(@_) != 1) {
+    util::DieArgs("frame::gameHandler::SaveGame()", 1, scalar(@_));
   }
   
+  my %data = %{$_[0]};
+  my @data;
+  foreach my $entry (keys %data) {
+    if ($entry eq "savefile") {
+      next;
+    }
+    push @data, "$entry=$data{$entry}";
+  }
+  
+  # create the directory first
+  if (!(-d "./saves")) {
+    mkdir "./saves";
+  }
+  chdir "./saves";
+  
+  system("clear");
+  util::PrintAtPos('m', 't', "=== Save Game ===");
+  util::PrintAtPos('l', 2, "Enter the filename you want to save to.");
+  util::PrintAtPos('l', 3, "If the file does not exist, it will be created for you.");
+  
+  util::SetCursorPos('l', 5);
+  util::ClearLine();
+  print "(*.sav): ";
+  
+  my $filename = <STDIN>;
+  chomp($filename);
+  
+  if (open(my $filecheck, "$filename.sav")) {
+    util::SetCursorPos('l', 5);
+    util::ClearLine();
+    print "$filename.sav already exists. Do you want to overwrite it? (y/N) ";
+    my $resp = <STDIN>;
+    chomp($resp);
+    if ($resp ne "y") {
+      util::PrintAtPos('l', 5, "WARNING: File not saved!");
+      sleep(2);
+      chdir "../";
+      return 1;
+    }
+  }
+  
+  $filename = $filename.".sav";
+  push @data, "savefile=$filename";
+  WriteToFile($filename, \@data);
+  chdir "../";
+
+  return 0;
 }
 
-
-#just tests:
-########################################
-saveVar("save1", "newText");
-saveVar("save2", 6, 2, "tjosan");
-#saveVar("save3.txt");
-my @save2content = openFile("save2");
-for my $item (@save2content) {
-  print "$item\n";
+sub WriteToFile {
+  if (scalar(@_) != 2) {
+    util::DieArgs("frame::gameHandler::WriteToFile()", 2, scalar(@_));
+  }
+  
+  my $filename = $_[0];
+  my @data = @{$_[1]};
+  
+  # ">" will create the file if it doesn't exist
+  open(my $fh, '>:encoding(UTF-8)', $filename);
+  foreach my $line (@data) {
+    print $fh "$line\n";
+  }
+  close($fh);
 }
 
-my $sceneInd;
-loadGame("save2", \$sceneInd);
-if ($sceneInd) {
-  print "$sceneInd\n";
+sub ReadFromFile {
+  if (scalar(@_) != 1) {
+    util::DieArgs("frame::gameHandler::ReadFromFile()", 1, scalar(@_));
+  }
+  
+  my $filename = $_[0];
+  my @lines = ();
+  if (!open (my $fh, '<:encoding(UTF-8)', $filename)) {
+    print "Cannot open $filename: $!";
+    return @lines;
+  }
+  open (my $fh, '<:encoding(UTF-8)', $filename);
+  chomp(@lines = <$fh>);
+  close $fh;
+  
+  return @lines;
 }
 
-deleteGame("save2");
+sub LoadGame {
+  if (scalar(@_) != 0) {
+    util::DieArgs("frame::gameHandler::LoadGame()", 0, scalar(@_));
+  }
+  
+  system("clear");
+  util::PrintAtPos('m', 't', "=== Load Game ===");
+  
+  my %data = ();
+  
+  if (!(-d "./saves")) {
+    util::PrintAtPos('l', 2, "No saves found.");
+    util::PrintAtPos('l', 4, "Press <ENTER> to continue...");
+    <STDIN>;
+    return %data;
+  }
 
-printSaves();
+  my @lines = ();
+  
+  util::PrintAtPos('l', 2, "Choose a file to load from: ");
+  util::SetCursorPos('l', 3);
+  my @files = GetSaves();
+  foreach my $file (@files) {
+    print "- $file\n";
+  }
+  
+  while (1) {
+    util::SetCursorPos('l', 'bb');
+    util::ClearLine();
+    print "(*.sav): ";
+  
+    my $filename = <STDIN>;
+    chomp($filename);
+    $filename = $filename.".sav";
+  
+    util::SetCursorPos('l', 'b');
+    chdir "./saves";
+    @lines = ReadFromFile($filename);
+    chdir "../";
+    if (!(@lines)) {
+      sleep(2);
+      util::ClearLine();
+      next;
+    }
 
-######################################
+    last;
+  }
+
+  # put all attributes into a hash, then return it
+  foreach my $line (@lines) {
+    if ($line =~ /^(.+)=(.+)/) {
+      $data{"$1"} = $2;
+    }
+  }
+
+  return %data;
+}
+
+sub GetSaves {
+  if (scalar(@_) != 0) {
+    util::DieArgs("frame::gameHandler::ListSaves()", 0, scalar(@_));
+  }
+  
+  my @saves = ();
+  
+  if (!(-d "./saves")) {
+    return @saves;
+  }
+  
+  my $dir;
+  opendir $dir, "./saves";
+  @saves = grep(/\.sav$/, readdir($dir));
+  closedir $dir;
+  return @saves;
+}
+
+sub DeleteSave {
+  if (scalar(@_) != 1) {
+    util::DieArgs("frame::gameHandler::DeleteSave()", 1, scalar(@_));
+  }
+  
+  my $filename = $_[0];
+  
+  chdir "./saves";
+  if (-e $filename) {
+    unlink $filename or print "Unable to delete $filename: $!";
+  } else {
+    print "Warning: $filename does not exist";
+  }
+  chdir "../";
+}
 
 1;

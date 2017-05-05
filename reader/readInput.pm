@@ -30,7 +30,6 @@ sub readInput {
   my $sceneText = "";
   my %option = ReadPlot(\@file, \%section, \%char, $sceneId);
   
-  print Dumper(\%option);
   return %option;
 }
 

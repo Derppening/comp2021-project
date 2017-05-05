@@ -5,6 +5,7 @@ use warnings 'FATAL' => 'all';
 
 use lib qw(..);
 
+use frame::gameHandler;
 use util::die;
 use Data::Dumper;
 
@@ -26,15 +27,28 @@ sub SceneSelector {
 
   print "=============Scene selection=============\n";
 
+  print "Start a new story from an existing plot: \n\n";
+
   foreach my $file (@files) {
     print ++$numoffiles . ". " . $file . "\n";
   }
 
-  print "\nWhich scene file would you like to open? ";
+  my @saves = frame::gameHandler::GetSaves();
+
+  if (@saves) {
+    print "\nOr load from a savefile. (type 'load') \n";
+  }
+
+  print "\n(selection): ";
+
   $resp = <STDIN>;
   chomp($resp);
 
-  if ($resp =~ /\D/) {
+  my %data = ();
+
+  if ($resp eq "load") {
+    %data = frame::gameHandler::LoadGame();
+  } elsif ($resp =~ /[\D\s]+/ or $resp eq "") {
     print "$resp: Not a valid file number\n";
     sleep(2);
     util::ClearLine();
@@ -46,9 +60,11 @@ sub SceneSelector {
     return SceneSelector();
   }
 
-  print "=========================================\n";
-
-  return $files[$resp - 1];
+  if (!%data) {
+    print "=========================================\n";
+    $data{'scenefile'} = $files[int($resp - 1)];
+  }
+  return %data;
 }
 
 

@@ -11,7 +11,6 @@ use warnings FATAL => 'all';
 use lib qw(..);
 
 use util::die;
-use open ':std', ':encoding(UTF-8)';
 
 # Interprets and outputs the plot to stdout
 #

@@ -34,7 +34,7 @@ sub EditMenu {
   }
   
   # check if the file exists and is valid, output a message if it's not okay
-  if (!(open(my $fh, '<:encoding(UTF-8)', $filename))) {
+  if (!(open(my $flecheck, '<:encoding(UTF-8)', $filename))) {
     util::PrintAtPos('l', 'b', "Cannot read from $filename: $!");
     sleep(2);
     util::SetCursorPos('l', 'b');

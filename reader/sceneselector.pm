@@ -36,7 +36,7 @@ sub SceneSelector {
   foreach my $file (@files) {
     print ++$numoffiles . ". " . $file . "\n";
   }
-  if (frame::gameHandler::GetSaves()) {
+  if (frame::GetSaves()) {
     print "\nOr load from a savefile. (type 'load') \n";
   }
   print "\n(selection): ";
@@ -48,7 +48,10 @@ sub SceneSelector {
   
   if ($resp eq "load") {
     # load from an existing save
-    %data = frame::gameHandler::LoadGame();
+    %data = frame::LoadGame();
+    if (!%data) {
+      return SceneSelector();
+    }
   } elsif ($resp =~ /[\D\s]+/ or $resp eq "") {
     # invalid input: contains non-numeric/input is blank
     print "$resp: Not a valid file number\n";

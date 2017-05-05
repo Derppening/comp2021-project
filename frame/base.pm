@@ -3,7 +3,7 @@
 # Manages the general gameplay.
 #
 
-package frame::base;
+package frame;
 
 use strict;
 use warnings FATAL => 'all';
@@ -20,8 +20,8 @@ use reader::readInput;
 # arg1: (Optional:) Only display help text
 #
 sub welcome {
-  if (scalar(@_) != 0 || scalar(@_) != 1) {
-    util::DieArgs("frame::base::welcome()", "<2", scalar(@_));
+  if (scalar(@_) != 0 && scalar(@_) != 1) {
+    util::DieArgs("frame::welcome()", "<2", scalar(@_));
   }
   if (!exists $_[0]) {
     print "Welcome to the game. ";
@@ -50,7 +50,7 @@ sub welcome {
 #
 sub scene {
   if (scalar(@_) != 4) {
-    util::DieArgs("frame::base::scene()", 4, scalar(@_));
+    util::DieArgs("frame::scene()", 4, scalar(@_));
   }
 
   my @file = @{$_[0]};
@@ -59,7 +59,7 @@ sub scene {
   my %data = %{$_[3]};
   
   my $playerAns = "";
-  my %opinion;
+  my %opinion = ();
   my $sceneInd = 1;
 
   $sceneInd = int($data{'scene'}) if exists $data{'scene'};
@@ -68,11 +68,12 @@ sub scene {
     system("clear");
     
     # read and display the plot text
-    util::PrintAtPos('m', 2, "");
-    util::SetCursorPos('l', 4);
+    util::SetCursorPos('l', 1);
     %opinion = reader::readInput(\@file, \%section, \%char, $sceneInd);
     
-    util::SetCursorPos('l', "bb");
+    util::SetCursorPos('l', 'b');
+    util::ClearLine();
+    util::SetCursorPos('l', 'bb');
     util::ClearLine();
     util::SetCursorPos('l', "bb");
     print ": ";
@@ -81,7 +82,7 @@ sub scene {
     # read the option...
     if ($playerAns eq "_save") {
       $data{'scene'} = $sceneInd;
-      if (frame::gameHandler::SaveGame(\%data) == 0) {
+      if (SaveGame(\%data) == 0) {
         util::SetCursorPos('l', 5);
         util::ClearLine();
         print "Game successfully saved";
@@ -95,30 +96,24 @@ sub scene {
     }
     
     # not a command: analyze using goPlot(...)
-    $sceneInd = reader::goPlot(\%opinion, $playerAns);
-    while($sceneInd eq -1) {
+    my $plot_res = reader::goPlot(\%opinion, $playerAns);
+    if ($plot_res eq -1) {
       util::SetCursorPos('l', 'b');
       print "$playerAns: Invalid option";
       
       sleep(2);
-      
-      util::SetCursorPos('l', 'b');
-      util::ClearLine();
-      util::SetCursorPos('l', 'bb');
-      util::ClearLine();
-      util::SetCursorPos('l', "bb");
-      print ": ";
-      chomp($playerAns = <STDIN>);
-      $sceneInd = reader::goPlot(\%opinion, $playerAns);
+      next;
     }
     
     # user responded with 'q'
-    if ($sceneInd eq 0) {
+    if ($plot_res eq 0) {
       print "Hope you enjoy the game. Bye :D";
       sleep(2);
       system("clear");
       last;
     }
+  
+    $sceneInd = $plot_res;
     
     system("clear");
   }

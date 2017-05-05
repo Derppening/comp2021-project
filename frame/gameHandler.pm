@@ -3,7 +3,7 @@
 # Manages the save/load feature of the game.
 #
 
-package frame::gameHandler;
+package frame;
 
 use strict;
 use warnings 'FATAL' => 'all';
@@ -19,7 +19,7 @@ use util::die;
 #
 sub SaveGame {
   if (scalar(@_) != 1) {
-    util::DieArgs("frame::gameHandler::SaveGame()", 1, scalar(@_));
+    util::DieArgs("frame::SaveGame()", 1, scalar(@_));
   }
   
   my %data = %{$_[0]};
@@ -52,7 +52,7 @@ sub SaveGame {
   chomp($filename);
   
   # check if the file already exists
-  if (open(my $filecheck, "$filename.sav")) {
+  if (open(my $filecheck, '<:encoding(UTF-8)', "$filename.sav")) {
     util::SetCursorPos('l', 5);
     util::ClearLine();
     print "$filename.sav already exists. Do you want to overwrite it? (y/N) ";
@@ -82,7 +82,7 @@ sub SaveGame {
 #
 sub WriteToFile {
   if (scalar(@_) != 2) {
-    util::DieArgs("frame::gameHandler::WriteToFile()", 2, scalar(@_));
+    util::DieArgs("frame::WriteToFile()", 2, scalar(@_));
   }
   
   my $filename = $_[0];
@@ -104,12 +104,12 @@ sub WriteToFile {
 #
 sub ReadFromFile {
   if (scalar(@_) != 1) {
-    util::DieArgs("frame::gameHandler::ReadFromFile()", 1, scalar(@_));
+    util::DieArgs("frame::ReadFromFile()", 1, scalar(@_));
   }
   
   my $filename = $_[0];
   my @lines = ();
-  if (!open (my $fh, '<:encoding(UTF-8)', $filename)) {
+  if (!open (my $filecheck, '<:encoding(UTF-8)', $filename)) {
     print "Cannot open $filename: $!";
     return @lines;
   }
@@ -127,7 +127,7 @@ sub ReadFromFile {
 #
 sub LoadGame {
   if (scalar(@_) != 0) {
-    util::DieArgs("frame::gameHandler::LoadGame()", 0, scalar(@_));
+    util::DieArgs("frame::LoadGame()", 0, scalar(@_));
   }
   
   system("clear");
@@ -143,10 +143,17 @@ sub LoadGame {
   }
 
   my @lines = ();
+  my @files = GetSaves();
+  
+  if (!@files) {
+    util::PrintAtPos('l', 2, "No saves found.");
+    util::PrintAtPos('l', 4, "Press <ENTER> to continue...");
+    <STDIN>;
+    return %data;
+  }
   
   util::PrintAtPos('l', 2, "Choose a file to load from: ");
   util::SetCursorPos('l', 3);
-  my @files = GetSaves();
   foreach my $file (@files) {
     print "- $file\n";
   }
@@ -189,7 +196,7 @@ sub LoadGame {
 #
 sub GetSaves {
   if (scalar(@_) != 0) {
-    util::DieArgs("frame::gameHandler::ListSaves()", 0, scalar(@_));
+    util::DieArgs("frame::ListSaves()", 0, scalar(@_));
   }
   
   my @saves = ();
@@ -211,7 +218,7 @@ sub GetSaves {
 #
 sub DeleteSave {
   if (scalar(@_) != 1) {
-    util::DieArgs("frame::gameHandler::DeleteSave()", 1, scalar(@_));
+    util::DieArgs("frame::DeleteSave()", 1, scalar(@_));
   }
   
   my $filename = $_[0];

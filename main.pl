@@ -9,8 +9,6 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Data::Dumper;
-
 use lib '.';
 
 use creator::mainmenu;
@@ -25,7 +23,7 @@ use util::terminal;
 # Displays the version text and quits
 #
 sub VersionText {
-  print "Bob 1.0.0-prelease.1\n";
+  print "Bob 1.0.0-prelease.2\n";
   exit;
 }
 
@@ -121,9 +119,9 @@ sub main {
     delete($data{'savefile'});
     sleep(2);
   } else {
-    frame::base::welcome();
+    frame::welcome();
   }
-  frame::base::scene(\@file, \%section, \%chars, \%data);
+  frame::scene(\@file, \%section, \%chars, \%data);
 }
 
 # Program Entry Point

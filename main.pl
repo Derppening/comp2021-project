@@ -25,7 +25,7 @@ use util::terminal;
 # Displays the version text and quits
 #
 sub VersionText {
-  print "Bob 1.0.0-prelease\n";
+  print "Bob 1.0.0-prelease.1\n";
   exit;
 }
 

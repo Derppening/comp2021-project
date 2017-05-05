@@ -13,7 +13,16 @@ use lib qw(..);
 use reader::import;
 use reader::readInput;
 
+# Displays the welcoming text
+#
+# Note: In frame::base::scene(), this method is reused to display help text
+#
+# arg1: (Optional:) Only display help text
+#
 sub welcome {
+  if (scalar(@_) != 0 || scalar(@_) != 1) {
+    util::DieArgs("frame::base::welcome()", "<2", scalar(@_));
+  }
   if (!exists $_[0]) {
     print "Welcome to the game. ";
   } else {
@@ -32,18 +41,13 @@ sub welcome {
   system("clear");
 }
 
-sub isAns{
-  #$numAlt,$playerAns
-  # if (looks_like_number($_[1])){
-  for (my $i = 1; $i <= $_[0]; $i++) {
-    if ($i == $_[1]) {
-      return 1;
-    }
-  }
-  # }
-  return 0;
-}
-
+# Displays a scene, reads user input, and invokes the next scene
+#
+# arg1: (Reference to) file contents array
+# arg2: (Reference to) plot header hash
+# arg3: (Reference to) characters hash
+# arg4: (Reference to) data hash
+#
 sub scene {
   if (scalar(@_) != 4) {
     util::DieArgs("frame::base::scene()", 4, scalar(@_));
@@ -56,24 +60,25 @@ sub scene {
   
   my $playerAns = "";
   my %opinion;
-  my $numAlt = 1; #Should be reset later on
-  my $sceneInd = 1; #Should be reset later on
-  my $sceneText = "\n";
+  my $sceneInd = 1;
 
   $sceneInd = int($data{'scene'}) if exists $data{'scene'};
   
   while(lc($playerAns) ne "q"){
     system("clear");
     
+    # read and display the plot text
     util::PrintAtPos('m', 2, "");
     util::SetCursorPos('l', 4);
     %opinion = reader::readInput(\@file, \%section, \%char, $sceneInd);
-
+    
     util::SetCursorPos('l', "bb");
     util::ClearLine();
     util::SetCursorPos('l', "bb");
     print ": ";
     chomp($playerAns = <STDIN>);
+    
+    # read the option...
     if ($playerAns eq "_save") {
       $data{'scene'} = $sceneInd;
       if (frame::gameHandler::SaveGame(\%data) == 0) {
@@ -88,8 +93,9 @@ sub scene {
       welcome(0);
       next;
     }
-    $sceneInd = reader::goPlot(\%opinion, $playerAns);
     
+    # not a command: analyze using goPlot(...)
+    $sceneInd = reader::goPlot(\%opinion, $playerAns);
     while($sceneInd eq -1) {
       util::SetCursorPos('l', 'b');
       print "$playerAns: Invalid option";
@@ -106,15 +112,16 @@ sub scene {
       $sceneInd = reader::goPlot(\%opinion, $playerAns);
     }
     
+    # user responded with 'q'
     if ($sceneInd eq 0) {
       print "Hope you enjoy the game. Bye :D";
       sleep(2);
       system("clear");
       last;
     }
+    
     system("clear");
   }
 }
 
-# All Perl modules need to end with a true value.
 1;

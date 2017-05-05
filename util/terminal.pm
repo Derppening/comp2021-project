@@ -37,20 +37,6 @@ sub GetTermSize {
   return @term;
 }
 
-# Sets the size of the current terminal
-#
-# arg1: New x-size of terminal
-# arg2: New y-size of terminal
-#
-sub SetTermSize {
-  if (scalar(@_) != 2) {
-    DieArgs("util::SetTermSize()", 2, scalar(@_));
-  }
-  
-  my @term = GetTerminalSize();
-  SetTerminalSize($_[0], $_[1], $term[2], $term[3]);
-}
-
 # Resets the position of the cursor
 #
 sub ResetCursor {

@@ -23,7 +23,7 @@ use util::terminal;
 # Displays the version text and quits
 #
 sub VersionText {
-    print "Bob 1.0.0\n";
+    print "Bob 1.0.1\n";
     exit;
 }
 

@@ -47,20 +47,20 @@ Bob
 
 4. System Structure 2       
     Project Modules
-    |----framework              (K/J)
-    |----reader                 (J/D)
-    |----creator                (D)
-    |----util   
+    | - framework              (K/J)
+    | - reader                 (J/D)
+    | - creator                (D)
+    | - util
     
     (opt="Challenges",1,5)
     (opt="Go Back",2,3)
 
 5. Challenges 3
+    (art=everything)
 
-    - E - V - E - R - Y - T - H - I - N - G - !
     ROARRRRRRRRRR
 
-    (opt="Serious?",1,6)
+    (opt="You serious?",1,6)
     (opt="Go Back",2,4)
 
 6. Challenges 3
@@ -83,13 +83,15 @@ Bob
     - File format
     - Creator Mode               (D)
 
-    (opt="Quit",q,7)
-    (end)
+    (opt="Live Demo",1,8)
+    (opt="Go Back",2,6)
 
 8. Demo (Sleepy.txt)
     === Live Demo ===
 
     For the demo, Klara will read out the plot and ask prof. to choose
+
+    (opt="Quit",q,8)
 
 9. Showing the txt file structure of the plot
     Go to Sleepy.txt file, showing the structure

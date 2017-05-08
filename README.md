@@ -1,15 +1,18 @@
 # Bob 
 
-A Perl-based framework for text-based role-playing game, supporting non-linear
+A Perl-based framework for generic text-based game, supporting non-linear
 gameplay.
 
 ## Getting Started
 
 These instructions will set your project up and running on your local machine.
 
+Note that as of v1.0.0, this project is only officially tested using *nix 
+machines. 
+
 ### Prerequisites
 
-* [Perl Interpreter](https://www.perl.org/get.html)
+* [Perl Interpreter v5.16.3+](https://www.perl.org/get.html)
 * [Perl Term::ReadKey Module](http://search.cpan.org/~jstowe/TermReadKey-2.37/ReadKey_pm.PL)
     * Run `cpan Term::ReadKey` in a command line to install the module
 

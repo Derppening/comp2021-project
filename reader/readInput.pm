@@ -23,14 +23,14 @@ use reader::import;
 # return: Hash of option in current plot
 #
 sub readInput {
-  my @file = @{$_[0]};
-  my %section = %{$_[1]};
-  my %char = %{$_[2]};
-  my $sceneId = $_[3];
-  my $sceneText = "";
-  my %option = ReadPlot(\@file, \%section, \%char, $sceneId);
-  
-  return %option;
+    my @file = @{$_[0]};
+    my %section = %{$_[1]};
+    my %char = %{$_[2]};
+    my $sceneId = $_[3];
+    my $sceneText = "";
+    my %option = ReadPlot(\@file, \%section, \%char, $sceneId);
+    
+    return %option;
 }
 
 # Return the plot number according to the options
@@ -41,20 +41,20 @@ sub readInput {
 # return: Cooresponding plot number
 #
 sub goPlot {
-  my %option = %{$_[0]};
-  my $myAns = $_[1];
-  my $result = 0;
-  
-  if (exists($option{$myAns})) {
-    $result = $option{$myAns};
-  } elsif ($myAns eq 'q') {
-    $result = 0;
-  } else {
-    # The user input does not match with any options in this plot
-    $result = -1;
-  }
-  
-  return $result;
+    my %option = %{$_[0]};
+    my $myAns = $_[1];
+    my $result = 0;
+    
+    if (exists($option{$myAns})) {
+        $result = $option{$myAns};
+    } elsif ($myAns eq 'q') {
+        $result = 0;
+    } else {
+        # The user input does not match with any options in this plot
+        $result = -1;
+    }
+    
+    return $result;
 }
 
 

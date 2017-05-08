@@ -41,14 +41,32 @@ sub ReadPlot {
     }
     
     my %hash;
+    my $ign_trail_sp = 0;
     
     # loop through all the lines
     foreach my $line (@plot) {
-        $line =~ s/^[\s\t]+//;
-        $line =~ s/\$([\d]+)/$chars{$1}/g;
-        if ($line =~ /^#.*/) {
+        if ($line =~ /^[\s\t]*\(ignore_space\)/) {
+            $ign_trail_sp = 1;
             next;
-        } elsif ($line =~ /\(art=.+\)/) {
+        } elsif ($line =~ /^[\s\t]*#.*/) {
+            next;
+        }
+        
+        # indentation toggle
+        $line =~ s/^[\s\t]+// if (!$ign_trail_sp);
+        
+        while ($line =~ /(?<!\\)\$([\d]+)/) {
+            if (exists $chars{$1}) {
+                $line =~ s/\$([\d]+)/$chars{$1}/;
+            } else {
+                $line =~ s/\$([\d]+)/\\\$$1/;
+            }
+        }
+        $line =~ s/\\\$/\$/g;
+        
+        # indented comments, e.g. abc # comment
+        $line =~ s/(.*)#.*/$1/;
+        if ($line =~ /\(art=.+\)/) {
             # art
             $line =~ s/\(art=(.+)\)/$1/;
             ReadArt($line);

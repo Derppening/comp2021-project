@@ -1,31 +1,36 @@
+# Comments begin with a pound-sign (#)
+
+# Characters: Stores all character names
 [characters]
-# character starts with index 1
+
+# Character starts with index 1
+# You can recall the different character names by using $n, where n is the
+# index of the character.
+
 Jason
 Bob
 
-[glob_var]
-
-[char_var]
-
+# Plot: Stores all the plot information
 [plot]
-1.
-    # Plot entry point
+# 1 is always the entry point for a scene
+
+1. # Anything after the plot number is currently ignored
+    # Displaying ASCII Art:
+    # Load your ASCII art into ./art.txt, set a tag, then use it
+
     (art=hkust)
-    $1 is walking on the street.
-    He must be bored lol.
+    Plot Statement 1
+
+    # Options: (opt="<display_string>", <user_input>, <goto_plot>)
         (opt="Continue walking",y,2)
         (opt="Stop",n,3)
 
-2. Statement 1A
-	# Plot entry point
-	FUCK.
-        (opt="Hello world",OK,1)
-        (opt="Bye world",NO,3)
+2.
+    Continue Walking
 
-3. Statement 1B
-	OMG, he say no.
-		(opt="back to the beginning",y,1)
-		(opt="start again",n,1)
+3.
+    Stop
 
 4. Statement 2
-    (end)
+    # For users to quit, make an infinite loop and set the user input to "q"
+    (opt="Quit",q,100)

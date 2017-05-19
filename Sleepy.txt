@@ -1,11 +1,6 @@
 [characters]
-# character starts with index 1
 Player
 An old man
-
-[glob_var]
-
-[char_var]
 
 [plot]
 1. Entry Point
@@ -103,11 +98,3 @@ An old man
     Thank you for playing this game!
 
     (opt="Quit",q,100)
-
-#Possible endings
-#- Aliens
-#- Robbery
-#- Hangover
-#- Ran away from hospital
-#- Waking up from dreaming. Two possible wake ups. Possibility to continue sleeping. 
-#- 

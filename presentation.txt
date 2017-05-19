@@ -4,10 +4,6 @@ Jackson
 Klara
 Bob
 
-[glob_var]
-
-[char_var]
-
 [plot]
 1.
     (art=hkust)
